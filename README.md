@@ -1,2 +1,17 @@
-# oficina-back-end
-Projeto de Oficina de Integração 2 (Back-End)
+# Projeto Oficina 2
+
+## Requisitos Funcionais
+* Autenticação do usuário.
+* Cadastro de usuário.
+* Recuperação de usuário.
+* Cadastro de medicamentos.
+* Edicação de medicamentos.
+* Exclusão de medicamentos.
+
+## Arquitetura
+* Clean Architecture
+
+## Tecnologia
+* ReactJS
+* NestJS
+* PostgreSQL
