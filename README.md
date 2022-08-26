@@ -11,7 +11,7 @@
 * Feed de medicamentos.
 
 ## Arquitetura
-* MVC Pattern
+![Image](documentation/arquitetura.png)
 
 ## Tecnologia
 * NodeJS
