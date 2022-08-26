@@ -7,8 +7,8 @@
 * Cadastro de medicamentos.
 * Edicação de medicamentos.
 * Exclusão de medicamentos.
-* Visualização de medicamentos.
 * Visualização de medicamento.
+* Feed de medicamentos.
 
 ## Arquitetura
 * MVC Pattern
