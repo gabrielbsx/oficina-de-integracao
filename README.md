@@ -13,13 +13,13 @@
 ## Arquitetura
 ![Image](documentation/arquitetura.png)
 
-## Tecnologia
+## Tecnologias
 * NodeJS
 * ReactJS
 * AdonisJS
 * PostgreSQL
 
-## Test
+## Tests
 * Japa
 * Jest
 
