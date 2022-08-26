@@ -7,11 +7,23 @@
 * Cadastro de medicamentos.
 * Edicação de medicamentos.
 * Exclusão de medicamentos.
+* Visualização de medicamentos.
+* Visualização de medicamento.
 
 ## Arquitetura
-* Clean Architecture
+* MVC Pattern
 
 ## Tecnologia
+* NodeJS
 * ReactJS
-* NestJS
+* AdonisJS
 * PostgreSQL
+
+## Test
+* Japa
+* Jest
+
+## Membros
+* Marina Fachin
+* Vinícius Lara
+* Gabriel Barbosa
