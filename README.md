@@ -12,6 +12,7 @@
 
 ## Arquitetura
 ![Image](documentation/arquitetura.png)
+![Image](documentation/mer.jpg)
 
 ## Tecnologias
 * NodeJS
