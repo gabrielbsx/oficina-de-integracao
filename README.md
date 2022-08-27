@@ -5,7 +5,7 @@
 * US0002: Cadastro de usuário.
 * US0003: Recuperação de usuário.
 * US0004: Cadastro de medicamentos.
-* US0005: Edicação de medicamentos.
+* US0005: Edição de medicamentos.
 * US0006: Exclusão de medicamentos.
 * US0007: Visualização de medicamento.
 * US0008: Feed de medicamentos.
