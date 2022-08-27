@@ -9,6 +9,7 @@
 * US0006: Exclusão de medicamentos.
 * US0007: Visualização de medicamento.
 * US0008: Feed de medicamentos.
+* US0009: Gerenciamento de agenda de medicamentos.
 
 ## Arquitetura
 ![Image](documentation/arquitetura.png)
