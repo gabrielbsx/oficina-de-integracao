@@ -4,5 +4,5 @@ test('display welcome page', async ({ client }) => {
   const response = await client.get('/')
 
   response.assertStatus(200)
-  response.assertBodyContains({ hello: 'world' })
+  response.assertTextIncludes('Projeto de Oficina de Integração 2 - API')
 })
