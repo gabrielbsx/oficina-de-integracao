@@ -7,11 +7,12 @@ declare module '@ioc:Adonis/Addons/Auth' {
       config: LucidProviderConfig<typeof Cliente>
     }
   }
+
   interface GuardsList {
-    basic: {
-      implementation: BasicAuthGuardContract<'user', 'basic'>
-      config: BasicAuthGuardConfig<'user'>
-      client: BasicAuthClientContract<'user'>
+    api: {
+      implementation: OATGuardContract<'user', 'api'>
+      config: OATGuardConfig<'user'>
+      client: OATClientContract<'user'>
     }
   }
 }
