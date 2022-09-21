@@ -29,7 +29,7 @@ export default class Cliente extends BaseModel {
 
   @beforeSave()
   public static async hashPassword(Cliente: Cliente) {
-    if (Cliente.$dirty.password) {
+    if (Cliente.$dirty.senha) {
       Cliente.senha = await Hash.make(Cliente.senha)
     }
   }
