@@ -7,11 +7,11 @@ test.group('UsersController', (group) => {
     await Database.beginGlobalTransaction()
     return () => Database.rollbackGlobalTransaction()
   })
-  test('endpoint returns a valid response', async ({ route, client }) => {
+  test('should returns a valid response', async ({ route, client }) => {
     const response = await client.post(route('UsersController.create'))
     response.hasBody()
   })
-  test('returns a error when nome is not provided', async ({ client, route }) => {
+  test('should returns a error when nome is not provided', async ({ client, route }) => {
     const user = {
       email: 'any_email@email.com',
       cpf: 'any_cpf',
@@ -31,7 +31,7 @@ test.group('UsersController', (group) => {
       ],
     })
   })
-  test('returns a error when nome is invalid length', async ({ client, route }) => {
+  test('should returns a error when nome is invalid length', async ({ client, route }) => {
     const user = {
       nome: 'any',
       email: 'any_email@email.com',
@@ -70,7 +70,7 @@ test.group('UsersController', (group) => {
       ],
     })
   })
-  test('returns a error when cpf is invalid regex', async ({ client, route }) => {
+  test('should returns a error when cpf is invalid regex', async ({ client, route }) => {
     const user = {
       nome: 'any',
       email: 'any_email@email.com',
@@ -91,7 +91,7 @@ test.group('UsersController', (group) => {
       ],
     })
   })
-  test('returns a error when cpf is not provided', async ({ client, route }) => {
+  test('should returns a error when cpf is not provided', async ({ client, route }) => {
     const user = {
       nome: 'any_nome',
       email: 'any_email@email.com',
@@ -111,7 +111,7 @@ test.group('UsersController', (group) => {
       ],
     })
   })
-  test('returns a error when cpf is not unique', async ({ client, route }) => {
+  test('should returns a error when cpf is not unique', async ({ client, route }) => {
     const date = new Date()
     date.setUTCDate(date.getDate() - 1)
     const user = {
@@ -135,7 +135,7 @@ test.group('UsersController', (group) => {
       ],
     })
   })
-  test('returns a error when email is not provided', async ({ client, route }) => {
+  test('should returns a error when email is not provided', async ({ client, route }) => {
     const user = {
       nome: 'any_nome',
       cpf: 'any_cpf',
@@ -155,7 +155,7 @@ test.group('UsersController', (group) => {
       ],
     })
   })
-  test('returns a error when email is not valid', async ({ client, route }) => {
+  test('should returns a error when email is not valid', async ({ client, route }) => {
     const user = {
       nome: 'any_nome',
       email: 'invalid_email',
@@ -176,7 +176,7 @@ test.group('UsersController', (group) => {
       ],
     })
   })
-  test('returns a error when data nascimento is not provided', async ({ client, route }) => {
+  test('should returns a error when data nascimento is not provided', async ({ client, route }) => {
     const user = {
       nome: 'any_nome',
       email: 'any_email@email.com',
@@ -196,7 +196,7 @@ test.group('UsersController', (group) => {
       ],
     })
   })
-  test('returns a error when data nascimento is after or equals now', async ({ client, route }) => {
+  test('should returns a error when data nascimento is after or equals now', async ({ client, route }) => {
     const user = {
       nome: 'any_nome',
       email: 'any_email@email.com',
@@ -217,7 +217,7 @@ test.group('UsersController', (group) => {
       ],
     })
   })
-  test('returns a ok response and create a user if values is valid', async ({ client, route }) => {
+  test('should returns a ok response and create a user if values is valid', async ({ client, route }) => {
     const date = new Date()
     const cpf = '123.123.123-12'
     date.setUTCDate(date.getUTCDate() - 1)
