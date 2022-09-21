@@ -17,7 +17,7 @@ export default class Cliente extends BaseModel {
   @column()
   public dataNascimento: Date
 
-  @column()
+  @column({ serializeAs: null })
   public senha: string
 
   @column.dateTime({ autoCreate: true })
