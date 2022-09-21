@@ -231,7 +231,7 @@ test.group('UsersController', (group) => {
     const response = await client.post(route('UsersController.create')).json(user)
     // eslint-disable-next-line @typescript-eslint/naming-convention
     const { confirmacao_senha, senha, ...cliente } = user
-    response.assertStatus(200)
+    response.assertStatus(201)
     response.assertBodyContains({
       body: {
         cliente,

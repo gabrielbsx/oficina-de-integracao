@@ -20,7 +20,7 @@ export default class UsersController {
       cpf,
       dataNascimento,
     })
-    return response.json({
+    return response.created({
       statusCode: 201,
       body: {
         cliente,
