@@ -11,7 +11,7 @@ test.group('UsersController', (group) => {
     const response = await client.post(route('UsersController.create'))
     response.hasBody()
   })
-  test('should returns a error when nome is not provided', async ({ client, route }) => {
+  test('should returns a error if nome is not provided', async ({ client, route }) => {
     const user = {
       email: 'any_email@email.com',
       cpf: 'any_cpf',
@@ -31,7 +31,7 @@ test.group('UsersController', (group) => {
       ],
     })
   })
-  test('should returns a error when nome is invalid length', async ({ client, route }) => {
+  test('should returns a error if nome is invalid length', async ({ client, route }) => {
     const user = {
       nome: 'any',
       email: 'any_email@email.com',
@@ -70,7 +70,7 @@ test.group('UsersController', (group) => {
       ],
     })
   })
-  test('should returns a error when cpf is invalid regex', async ({ client, route }) => {
+  test('should returns a error if cpf is invalid regex', async ({ client, route }) => {
     const user = {
       nome: 'any',
       email: 'any_email@email.com',
@@ -91,7 +91,7 @@ test.group('UsersController', (group) => {
       ],
     })
   })
-  test('should returns a error when cpf is not provided', async ({ client, route }) => {
+  test('should returns a error if cpf is not provided', async ({ client, route }) => {
     const user = {
       nome: 'any_nome',
       email: 'any_email@email.com',
@@ -111,7 +111,7 @@ test.group('UsersController', (group) => {
       ],
     })
   })
-  test('should returns a error when cpf is not unique', async ({ client, route }) => {
+  test('should returns a error if cpf is not unique', async ({ client, route }) => {
     const date = new Date()
     date.setUTCDate(date.getDate() - 1)
     const user = {
@@ -135,7 +135,7 @@ test.group('UsersController', (group) => {
       ],
     })
   })
-  test('should returns a error when email is not provided', async ({ client, route }) => {
+  test('should returns a error if email is not provided', async ({ client, route }) => {
     const user = {
       nome: 'any_nome',
       cpf: 'any_cpf',
@@ -155,7 +155,7 @@ test.group('UsersController', (group) => {
       ],
     })
   })
-  test('should returns a error when email is not valid', async ({ client, route }) => {
+  test('should returns a error if email is not valid', async ({ client, route }) => {
     const user = {
       nome: 'any_nome',
       email: 'invalid_email',
@@ -176,7 +176,7 @@ test.group('UsersController', (group) => {
       ],
     })
   })
-  test('should returns a error when data nascimento is not provided', async ({ client, route }) => {
+  test('should returns a error if data nascimento is not provided', async ({ client, route }) => {
     const user = {
       nome: 'any_nome',
       email: 'any_email@email.com',
@@ -196,7 +196,7 @@ test.group('UsersController', (group) => {
       ],
     })
   })
-  test('should returns a error when data nascimento is after or equals now', async ({ client, route }) => {
+  test('should returns a error if data nascimento is after or equals now', async ({ client, route }) => {
     const user = {
       nome: 'any_nome',
       email: 'any_email@email.com',
