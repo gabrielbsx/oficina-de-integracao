@@ -111,14 +111,16 @@ test.group('UsersController', (group) => {
       ],
     })
   })
-  test('returns a error when cpf is not unique', async ({ client, route, assert }) => {
+  test('returns a error when cpf is not unique', async ({ client, route }) => {
+    const date = new Date()
+    date.setUTCDate(date.getDate() - 1)
     const user = {
       nome: 'any_nome',
       cpf: '123.123.123-12',
       email: 'any_email@email.com',
       senha: 'any_senha',
       confirmacao_senha: 'any_senha',
-      data_nascimento: new Date(),
+      data_nascimento: date,
     }
     await client.post(route('UsersController.create')).json(user)
     const response = await client.post(route('UsersController.create')).json(user)
