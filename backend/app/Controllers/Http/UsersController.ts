@@ -9,14 +9,14 @@ export default class UsersController {
     const {
       nome,
       email,
-      senha,
+      senha: password,
       cpf,
       data_nascimento: dataNascimento,
     } = request.only(['nome', 'email', 'senha', 'cpf', 'data_nascimento']) as IUserCreate
     const cliente = await Cliente.create({
       nome,
       email,
-      senha,
+      password,
       cpf,
       dataNascimento,
     })

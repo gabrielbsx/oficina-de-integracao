@@ -18,8 +18,8 @@ export default class Cliente extends BaseModel {
   @column()
   public dataNascimento: Date
 
-  @column({ serializeAs: null })
-  public senha: string
+  @column({ serializeAs: null, columnName: 'senha' })
+  public password: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -29,8 +29,8 @@ export default class Cliente extends BaseModel {
 
   @beforeSave()
   public static async hashPassword(Cliente: Cliente) {
-    if (Cliente.$dirty.senha) {
-      Cliente.senha = await Hash.make(Cliente.senha)
+    if (Cliente.$dirty.password) {
+      Cliente.password = await Hash.make(Cliente.password)
     }
   }
 }
