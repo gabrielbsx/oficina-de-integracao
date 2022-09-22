@@ -196,7 +196,10 @@ test.group('UsersController', (group) => {
       ],
     })
   })
-  test('should returns a error if data nascimento is after or equals now', async ({ client, route }) => {
+  test('should returns a error if data nascimento is after or equals now', async ({
+    client,
+    route,
+  }) => {
     const user = {
       nome: 'any_nome',
       email: 'any_email@email.com',
@@ -217,7 +220,10 @@ test.group('UsersController', (group) => {
       ],
     })
   })
-  test('should returns a ok response and create a user if values is valid', async ({ client, route }) => {
+  test('should returns a ok response and create a user if values is valid', async ({
+    client,
+    route,
+  }) => {
     const date = new Date()
     const cpf = '123.123.123-12'
     date.setUTCDate(date.getUTCDate() - 1)
