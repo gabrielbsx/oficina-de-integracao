@@ -1,6 +1,7 @@
 import Route from '@ioc:Adonis/Core/Route'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import './routes/users'
+import './routes/auth'
 
 Route.get('/', async ({ response }: HttpContextContract) => {
   return response.send('Projeto de Oficina de Integração 2 - API')
