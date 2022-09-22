@@ -1,6 +1,8 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import UserRecovery from 'App/interfaces/user-recovery'
 import Cliente from 'App/Models/Cliente'
 import UserCreateValidator from 'App/Validators/UserCreateValidator'
+import UserRecoveryValidator from 'App/Validators/UserRecoveryValidator'
 import IUserCreate from '../../interfaces/user-create'
 
 export default class UsersController {
@@ -24,6 +26,17 @@ export default class UsersController {
       statusCode: 201,
       body: {
         cliente,
+      },
+    })
+  }
+  public async recovery({ request, response }: HttpContextContract) {
+    await request.validate(UserRecoveryValidator)
+    const { cpf } = request.only(['cpf']) as UserRecovery
+    const cliente = await Cliente.query().where('cpf', cpf).firstOrFail()
+    return response.ok({
+      statusCode: 200,
+      body: {
+        message: `uma nova senha foi enviada ao e-mail: ${cliente.email}`,
       },
     })
   }
