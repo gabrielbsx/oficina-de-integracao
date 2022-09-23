@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import icon from '../../assets/logo.png'
+import icon from '../../assets/icon.png'
 
 import './index.css'
 

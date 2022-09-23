@@ -7,7 +7,6 @@ const Main = () =>{
     return(
         <div>
             <Header screem="Main" />
-
             <div className="logo">
                 <img src={logo} alt="Logo"/>
             </div>
