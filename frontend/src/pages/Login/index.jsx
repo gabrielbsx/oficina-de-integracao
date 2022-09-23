@@ -7,7 +7,7 @@ import './index.css'
 import api from '../../api';
 
 
-const Login = () =>{
+const Login = ({ setToken }) =>{
 
     const navegar = useNavigate()
 
@@ -45,6 +45,8 @@ const Login = () =>{
                                             color: '#fff',
                                           },
                                         });
+                                        setToken(cliente.token);
+                                        navegar('/');
                                       }
                                 } catch (error) {
                                     const errors = error.response.data.errors;
