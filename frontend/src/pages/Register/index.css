@@ -58,3 +58,11 @@ input, label {
     width: 180px;
     border-radius: 4px;
 }
+
+.input-error {
+    border: 1px solid red;
+}
+
+.small-error {
+    color: red;
+}
