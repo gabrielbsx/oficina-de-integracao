@@ -1,7 +1,9 @@
 import Header from "../../components/Header";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import api from "../../api";
 import "./index.css";
+import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
   return (
@@ -31,7 +33,7 @@ const Register = () => {
             password: Yup.string().required().min(8).max(50).matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/, 'password must be at least 8 characters containing letters, numbers and at least one special character.'),
             repeatPassword: Yup.string().required().oneOf([Yup.ref('password'), null], 'password confirmation must be equals password'),
           })}
-          onSubmit={(values, { setSubmitting }) => {
+          onSubmit={async (values, { setSubmitting }) => {
             const {
               name: nome,
               cpf,
@@ -41,7 +43,31 @@ const Register = () => {
               repeatPassword: confirmacao_senha,
             } = values;
             const user = { nome, email, cpf, data_nascimento, senha, confirmacao_senha };
-            console.log(user);
+            
+            try {
+              const { data: { body: { cliente }, statusCode } } = await api.post('/users/create', user);
+
+              if (statusCode === 201) {
+                toast('Conta criada com sucesso!', {
+                  icon: '👏',
+                  style: {
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                  },
+                });
+              }
+            } catch (error) {
+              const errors = error.response.data.errors;
+              const message = errors.map((error) =>  error.message).join(', ')
+              toast.error(message, {
+                style: {
+                  borderRadius: '10px',
+                  background: '#333',
+                  color: '#fff',
+                },
+              });
+            }
           }}
         >
           {({
@@ -161,6 +187,7 @@ const Register = () => {
           )}
         </Formik>
       </div>
+      <Toaster position="bottom-center" reverseOrder={false} />
     </div>
   );
 };
