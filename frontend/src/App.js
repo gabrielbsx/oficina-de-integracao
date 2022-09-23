@@ -6,6 +6,7 @@ import Register from './pages/Register/index'
 import Refactor from './pages/RefactoryPassword/index';
 
 function App() {
+  document.title = 'Medicine Manager'
   return (
     <div className="App">
       <BrowserRouter>
