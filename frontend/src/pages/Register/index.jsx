@@ -18,7 +18,7 @@ const Register = () => {
           initialValues={{
             name: '',
             cpf: '',
-            date: null,
+            date: '',
             email: '',
             password: '',
             repeatPassword: '',
@@ -104,7 +104,7 @@ const Register = () => {
               <label htmlFor="repeat-password">Repetir a Senha</label>
               <input
                 id="userpasswordConfirm"
-                name="repeat-password"
+                name="repeatPassword"
                 type="password"
                 placeholder="Confirm your password"
                 onChange={handleChange}
