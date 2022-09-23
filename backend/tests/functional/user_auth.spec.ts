@@ -115,11 +115,12 @@ test.group('AuthController SignIn', (group) => {
     const date = new Date()
     date.setUTCDate(date.getUTCDate() - 1)
     const cliente = {
+      nome: 'Gabriel',
       cpf: '123.123.123-00',
       email: 'any_email@email.com',
       senha: 'minha_senha',
       confirmacao_senha: 'minha_senha',
-      data_nascimneto: date,
+      data_nascimento: date,
     }
     let response = await client.post(route('UsersController.create')).json(cliente)
     response = await client.post(route('AuthController.signin')).json(cliente)
