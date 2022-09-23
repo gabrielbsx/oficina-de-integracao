@@ -3,7 +3,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Main from './pages/Main/index'
 import Login from './pages/Login/index';
 import Register from './pages/Register/index'
-import Refactor from './pages/RefactorPassword/index';
+import Refactor from './pages/RefactoryPassword/index';
 
 function App() {
   return (
