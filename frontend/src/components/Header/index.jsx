@@ -38,7 +38,7 @@ const Header = ({ screem }) => {
 	return (
 		<div className="Header">
 			<div className='Header-logo'>
-				<img src={icon} alt="Icone" />
+				<img onClick={() => navegar('/')} src={icon} alt="Icone" />
 			</div>
 			<div className='Header-btns'>
 				{renderNavLinks(screem)}

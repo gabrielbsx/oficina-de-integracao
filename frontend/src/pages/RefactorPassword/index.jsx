@@ -1,20 +1,17 @@
-import { useNavigate } from 'react-router-dom'
 import Header from "../../components/Header"
 import './index.css'
 
 
-const Login = () =>{
-
-    const navegar = useNavigate()
+const Refactor = () =>{
 
     return(
         <div className="login">
-            <Header screem='Login' />
+            <Header screem='Register' />
 
             <div className="Login container mt-4">
                 <div className="row justify-content-center">
                     <div className="col-6">
-                        <h1>Login</h1>
+                        <h1>Recovery your password</h1>
                         <form>
                             <div className="mb-3">
                                 <label htmlFor="inputEmail" className="form-label">Email</label>
@@ -25,19 +22,8 @@ const Login = () =>{
                                     placeholder='Input your email'
                                 />
                             </div>
-                            <div className="mb-3">
-                                <label htmlFor="inputPassword" className="form-label">Senha</label>
-                                <input
-                                    type="password"
-                                    className="form-control"
-                                    id="inputPassword"
-                                    placeholder='Input your password'
-                                />
-                            </div>
 
-                            <span className="spanlogin" onClick={() => navegar('/refactorpassword')}>Forgot your password?</span>
-
-                            <button>Enter</button>
+                            <button>Send</button>
                         </form>
                     </div>
                 </div>
@@ -46,4 +32,4 @@ const Login = () =>{
     )
 }
 
-export default Login
+export default Refactor
