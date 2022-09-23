@@ -1,41 +1,127 @@
 import Header from "../../components/Header";
+import { Formik } from "formik";
 
-import './index.css'
+import "./index.css";
 
-const Register = () =>{
-    return(
-        <div>
-            <Header screem="Register"></Header>
+const Register = () => {
+  return (
+    <div>
+      <Header screem="Register"></Header>
 
-            <div className="cadastro">
-                <h1>Register</h1>
-		        <p class="descricao">Como a sua conta, você poderá gerenciar suas coleções em flash cards.</p>
-		        
-                <form id="formCadastro">
-                    <label for="name">Nome</label>
-			        <input id="username" name="name" placeholder="Input your name" type="text" required/>
+      <div className="cadastro">
+        <h1>Register</h1>
+        <p className="descricao">
+          Como a sua conta, você poderá gerenciar suas coleções em flash cards.
+        </p>
 
-                    <label for="cpf">Cpf</label>
-			        <input id="usercpf" name="cpf" placeholder="Input your CPF" type="text" required/>
+				<Formik
+          initialValues={{
+            name: '',
+            cpf: '',
+            date: null,
+            email: '',
+            password: '',
+            repeatPassword: '',
+          }}
+          onSubmit={(values, { setSubmitting }) => {
+            console.log(values);
+          }}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+          }) => (
+            <form id="formCadastro" onSubmit={handleSubmit}>
+              <label htmlFor="name">Nome</label>
+              <input
+                id="username"
+                name="name"
+                placeholder="Input your name"
+                type="text"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.name}
+                required
+              />
 
-                    <label for="date">Cpf</label>
-			        <input id="userdate" name="date" placeholder="Input your birth date" type="date" required/>
+              <label htmlFor="cpf">Cpf</label>
+              <input
+                id="usercpf"
+                name="cpf"
+                placeholder="Input your CPF"
+                type="text"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.cpf}
+                required
+              />
 
-			        <label for="email">E-mail</label>
-			        <input id="userEmail" name="email" placeholder="Input your e-mail" type="email" required/>
+              <label htmlFor="date">Cpf</label>
+              <input
+                id="userdate"
+                name="date"
+                placeholder="Input your birth date"
+                type="date"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.date}
+                required
+              />
 
-			        <label for="password">Senha</label>
-			        <input id="userpassword" name="password" type="password" placeholder="Input your password" required/>
-			        <p class="condicaosenha">Use at least 8 characters containing letters, numbers and at least one special character</p>
+              <label htmlFor="email">E-mail</label>
+              <input
+                id="userEmail"
+                name="email"
+                placeholder="Input your e-mail"
+                type="email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+                required
+              />
 
-			        <label for="repeat-password">Repetir a Senha</label>
-			        <input id="userpasswordConfirm" name="repeat-password" type="password" placeholder="Confirm your password" required/>
+              <label htmlFor="password">Senha</label>
+              <input
+                id="userpassword"
+                name="password"
+                type="password"
+                placeholder="Input your password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+                required
+              />
+              <p className="condicaosenha">
+                Use at least 8 characters containing letters, numbers and at least
+                one special character
+              </p>
 
-			        <button type="submit" class="btn btn-primary"><b>Sign Up</b></button>
-		        </form>
-            </div>
-        </div>
-    )
-}
+              <label htmlFor="repeat-password">Repetir a Senha</label>
+              <input
+                id="userpasswordConfirm"
+                name="repeat-password"
+                type="password"
+                placeholder="Confirm your password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.repeatPassword}
+                required
+              />
 
-export default Register
+              <button type="submit" className="btn btn-primary">
+                <b>Sign Up</b>
+              </button>
+            </form>
+          )}
+        </Formik>
+      </div>
+    </div>
+  );
+};
+
+export default Register;
