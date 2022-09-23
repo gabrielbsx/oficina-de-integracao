@@ -1,32 +1,53 @@
-.login h1{
+input, label {
+    display: block;
+}
+
+.cadastro h1 {
     font-size: 48px;
     text-align: center;
     margin-top: 120px;
+    margin-bottom: 0px;
     color: black;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.login form {
+.cadastro .descricao {
+    text-align: center;
+    margin: 16px 0px 64px 0px;
+    font-size: 24px;
+    color: white;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.cadastro form {
     width: 40vw;
     margin: 0 auto;
 }
 
-.login label {
+.cadastro label {
     font-size: 24px;
     margin: 24px 0px 8px 0px;
     font-family: Arial, Helvetica, sans-serif;
     color: white;
 }
 
-.login input {
+.cadastro input {
     width: 40vw;
     font-size: 18px;
     padding: 12px;
-    margin-top: 10px;
     border-radius: 8px;
-} 
+}
 
-.login button {
+.cadastro .condicaosenha{
+    margin-top: .5rem;
+    color: #868e96;
+}
+
+.mensagem-erro {
+    color: #ed373a;
+}
+
+.cadastro button {
     border: none;
     font-size: 24px;
     color: #fff;
@@ -36,12 +57,4 @@
     background-color: red;
     width: 180px;
     border-radius: 4px;
-}
-
-.mensagem-erro {
-    color: #ed373a;
-}
-
-.spanlogin{
-    color: black;
 }
