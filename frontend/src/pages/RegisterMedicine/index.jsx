@@ -13,13 +13,10 @@ const RegisterMedicine = () => {
       <Header screem="Register"></Header>
 
       <div className="cadastro">
-        <h1>Register</h1>
-        <p className="descricao">
-          Como a sua conta, você poderá gerenciar suas coleções em flash cards.
-        </p>
+        <h1>Register Medicine</h1>
 
-				<Formik
-          initialValues={{
+		<Formik
+            initialValues={{
             name: '',
             cpf: '',
             date: '',
@@ -84,9 +81,9 @@ const RegisterMedicine = () => {
             <form id="formCadastro" onSubmit={handleSubmit}>
               <label htmlFor="name">Nome</label>
               <input
-                id="username"
+                id="medicinename"
                 name="name"
-                placeholder="Input your name"
+                placeholder="Input Medicine Name"
                 type="text"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -100,9 +97,9 @@ const RegisterMedicine = () => {
 
               <label htmlFor="cpf">Cpf</label>
               <input
-                id="usercpf"
-                name="cpf"
-                placeholder="Input your CPF"
+                id="medicinepharmaceutical"
+                name="pharmaceutical"
+                placeholder="Input Pharmaceutical Name"
                 type="text"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -114,76 +111,8 @@ const RegisterMedicine = () => {
                 <small className="small-error">{errors.cpf}</small>
               ): null}
 
-              <label htmlFor="date">Cpf</label>
-              <input
-                id="userdate"
-                name="date"
-                placeholder="Input your birth date"
-                type="date"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.date}
-                className={touched.date && errors.date ? 'input-error' : null}
-                required
-              />
-              {touched.date && errors.date ? (
-                <small className="small-error">{errors.date}</small>
-              ): null}
-
-              <label htmlFor="email">E-mail</label>
-              <input
-                id="userEmail"
-                name="email"
-                placeholder="Input your e-mail"
-                type="email"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-                className={touched.email && errors.email ? 'input-error' : null}
-                required
-              />
-              {touched.email && errors.email ? (
-                <small className="small-error">{errors.email}</small>
-              ): null}
-
-              <label htmlFor="password">Senha</label>
-              <input
-                id="userpassword"
-                name="password"
-                type="password"
-                placeholder="Input your password"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
-                className={touched.password && errors.password ? 'input-error' : null}
-                required
-              />
-              {touched.password && errors.password ? (
-                <small className="small-error">{errors.password}</small>
-              ): null}
-              <p className="condicaosenha">
-                Use at least 8 characters containing letters, numbers and at least
-                one special character
-              </p>
-
-              <label htmlFor="repeat-password">Repetir a Senha</label>
-              <input
-                id="userpasswordConfirm"
-                name="repeatPassword"
-                type="password"
-                placeholder="Confirm your password"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.repeatPassword}
-                className={touched.repeatPassword && errors.repeatPassword ? 'input-error' : null}
-                required
-              />
-              {touched.repeatPassword && errors.repeatPassword ? (
-                <small className="small-error">{errors.repeatPassword}</small>
-              ): null}
-
               <button type="submit" className="btn btn-primary">
-                <b>Sign Up</b>
+                <b>Register</b>
               </button>
             </form>
           )}
@@ -195,4 +124,4 @@ const RegisterMedicine = () => {
 }
 
 
-export default RegisterMedicine;
+export default RegisterMedicine
