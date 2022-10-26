@@ -10,7 +10,7 @@ import toast, { Toaster } from "react-hot-toast";
 const RegisterMedicine = () => {
     return(
         <div>
-      <Header screem="Register"></Header>
+      <Header screem="RegisterMedicine"></Header>
 
       <div className="cadastro">
         <h1>Register Medicine</h1>
