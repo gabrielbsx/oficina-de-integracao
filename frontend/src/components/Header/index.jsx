@@ -30,6 +30,13 @@ const Header = ({ screem }) => {
 					</>
 				)
 
+			case 'RegisterMedicine':
+				return (
+					<>
+						<span onClick={() => navegar('/registermedicine')}><strong>Home</strong></span>
+					</>
+				)
+
 			default:
 				break
 		}
