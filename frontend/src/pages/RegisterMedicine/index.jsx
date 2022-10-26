@@ -5,9 +5,13 @@ import * as Yup from "yup";
 import api from "../../api";
 import "./index.css";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from 'react-router-dom'
 
 
 const RegisterMedicine = () => {
+
+    const navegar = useNavigate()
+
     return(
         <div>
       <Header screem="RegisterMedicine"></Header>

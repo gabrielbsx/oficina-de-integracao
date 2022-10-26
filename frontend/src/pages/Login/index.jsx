@@ -37,7 +37,7 @@ const Login = () =>{
 
                             <span className="spanlogin" onClick={() => navegar('/refactorpassword')}>Forgot your password?</span>
 
-                            <button>Enter</button>
+                            <button onClick={() => navegar('/registermedicine')}>Enter</button>
                         </form>
                     </div>
                 </div>
