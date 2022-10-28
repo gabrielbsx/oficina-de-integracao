@@ -108,9 +108,7 @@ test.group('UsersController.recovery', (group) => {
     const response = await client.post(route('UsersController.recovery')).json({ cpf })
     response.assertStatus(200)
     response.assertBodyContains({
-      body: {
-        message: `uma nova senha foi enviada ao e-mail: ${cliente.email}`,
-      },
+      statusCode: 200,
     })
   })
 })
