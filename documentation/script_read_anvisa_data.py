@@ -1,22 +1,16 @@
 import csv
+import sqlite3
 
 if __name__ == '__main__':
-  with open('documentation/DADOS_ABERTOS_MEDICAMENTOS.csv', 'r', newline='', encoding='latin-1') as medicines:
+  with open('DADOS_ABERTOS_MEDICAMENTOS.csv', 'r', newline='', encoding='latin-1') as medicines:
     medicines_csv = csv.DictReader(medicines, delimiter=';', quotechar='\n')
-
-    # row['NOME_PRODUTO']
-    # row['TIPO_PRODUTO']
-    # row['DATA_FINALIZACAO_PROCESSO']
-    # row['CATEGORIA_REGULATORIA']
-    # row['NUMERO_REGISTRO_PRODUTO']
-    # row['DATA_VENCIMENTO_REGISTRO']
-    # row['NUMERO_PROCESSO']
-    # row['CLASSE_TERAPEUTICA']
-    # row['EMPRESA_DETENTORA_REGISTRO']
-    # row['SITUACAO_REGISTRO']
-    # row['PRINCIPIO_ATIVO']
-
     nome_length = 0
-
     for index, row in enumerate(medicines_csv):
-      print(row['NOME_PRODUTO'])
+      print(row['NOME_PRODUTO'], row['EMPRESA_DETENTORA_REGISTRO'])
+      sqlite_path = '../backend/tmp/db.sqlite3'
+      sqlite_connection = sqlite3.connect(sqlite_path)
+      query = 'INSERT INTO medicamentos (id, nome, farmaceutica) VALUES (NULL, ?, ?)'
+      sqlite_connection.execute(query, (row['NOME_PRODUTO'], row['EMPRESA_DETENTORA_REGISTRO']))
+      sqlite_connection.commit()
+    sqlite_connection.close()
+      
