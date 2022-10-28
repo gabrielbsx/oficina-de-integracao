@@ -5,8 +5,8 @@ export default class CreateMedicineValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    id_medicamento: schema.number([rules.exists({ table: 'medicamentos', column: 'id' })]),
-    hora_gerenciamento: schema.date(),
+    idMedicamento: schema.number([rules.exists({ table: 'medicamentos', column: 'id' })]),
+    horaGerenciamento: schema.date(),
   })
 
   public messages: CustomMessages = {

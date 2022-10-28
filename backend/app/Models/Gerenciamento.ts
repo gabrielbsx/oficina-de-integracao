@@ -11,7 +11,7 @@ export default class Gerenciamento extends BaseModel {
   public idMedicamento: number
 
   @column()
-  public horaGerenciamento: Date
+  public horaGerenciamento: DateTime
 
   @column()
   public idCliente: number
