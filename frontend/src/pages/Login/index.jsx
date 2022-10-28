@@ -47,7 +47,7 @@ const Login = ({ setToken }) =>{
                                         });
                                         setToken(cliente.token);
                                         navegar('/');
-                                      }
+                                    }
                                 } catch (error) {
                                     const errors = error.response.data.errors;
                                     const message = errors.map((error) =>  error.message).join(', ')
@@ -106,7 +106,7 @@ const Login = ({ setToken }) =>{
 
                                     <span className="spanlogin" onClick={() => navegar('/refactorpassword')}>Forgot your password?</span>
 
-                                    <button>Enter</button>
+                                    <button type="submit">Enter</button>
                                 </form>
                             )}
                         </Formik>

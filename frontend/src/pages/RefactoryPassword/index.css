@@ -41,3 +41,10 @@
 .mensagem-erro {
     color: #ed373a;
 }
+
+.new-password {
+    color: black;
+    font-weight: bolder;
+    text-align: center;
+    margin-top: 10px;
+}
