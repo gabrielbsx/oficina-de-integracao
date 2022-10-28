@@ -22,12 +22,11 @@ function App() {
           <Route path='/login' element={<Login setToken={setToken} />} />
           <Route path='/register' element={<Register />} />
           <Route path='/refactorpassword' element={<Refactor />} />
-          <Route path='/registermedicine' element={<RegisterMedicine />} />
         </Routes>
       ): (
-        <>
-          Usuário autenticado
-        </>
+        <Routes>
+          <Route path='/' element={<RegisterMedicine />} />
+        </Routes>
       )}
       </BrowserRouter>
     </div>
