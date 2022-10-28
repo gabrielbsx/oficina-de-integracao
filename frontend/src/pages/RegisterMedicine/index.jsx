@@ -1,73 +1,94 @@
-
 import Header from "../../components/Header";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import api from "../../api";
 import "./index.css";
 import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from 'react-router-dom'
-
+import { useNavigate } from "react-router-dom";
+import { useMemo, useState } from "react";
+import Select from "react-select";
+import { AsyncPaginate } from "react-select-async-paginate";
+import { TextField } from "@material-ui/core";
 
 const RegisterMedicine = () => {
+  const [limit, setLimit] = useState(10);
+  const [medicine, setMedicine] = useState();
+  const [medicines, setMedicines] = useState([]);
+  const [date, setDate] = useState("04:20");
+  // const [page, setPage] = useState(1);
+  const [meta, setMeta] = useState();
+  const navegar = useNavigate();
 
-    const navegar = useNavigate()
+  const fetchMedicines = async (search = "", options, { page }) => {
+    try {
+      page = page || 1;
+      const { data } = await api.get(
+        `/medicines?page=${page}&limit=${limit}&search=${search}`
+      );
+      if (data.statusCode === 200) {
+        setMeta(data.body.medicamentos.meta);
+        const hasMore = data.body.medicamentos.meta.last_page > page;
+        const options = data.body.medicamentos.data.map((medicine) => ({
+          value: medicine.id,
+          label:
+            medicine.nome.replace(/"/g, "").toLowerCase() +
+            " - " +
+            medicine.farmaceutica
+              .replace(/"/g, "")
+              .toLowerCase()
+              .split(" - ")[1],
+        }));
+        setMedicines(options);
+        return {
+          options,
+          hasMore,
+          additional: {
+            page: page + 1,
+          },
+        };
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    return(
-        <div>
+  return (
+    <div>
       <Header screem="RegisterMedicine"></Header>
 
       <div className="cadastro">
         <h1>Register Medicine</h1>
 
-		<Formik
-            initialValues={{
-            name: '',
-            cpf: '',
-            date: '',
-            email: '',
-            password: '',
-            repeatPassword: '',
-          }}
-          validationSchema={Yup.object({
-            name: Yup.string().required().max(50),
-            cpf: Yup.string().required().min(13).max(15).matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'cpf must match the following: xxx.xxx.xxx-xx.'),
-            date: Yup.date().required(),
-            email: Yup.string().required().email(),
-            password: Yup.string().required().min(8).max(50).matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/, 'password must be at least 8 characters containing letters, numbers and at least one special character.'),
-            repeatPassword: Yup.string().required().oneOf([Yup.ref('password'), null], 'password confirmation must be equals password'),
-          })}
-          onSubmit={async (values, { setSubmitting }) => {
-            const {
-              name: nome,
-              cpf,
-              email,
-              date: data_nascimento,
-              password: senha,
-              repeatPassword: confirmacao_senha,
-            } = values;
-            const user = { nome, email, cpf, data_nascimento, senha, confirmacao_senha };
-            
+        <Formik
+          initialValues={{}}
+          onSubmit={async () => {
             try {
-              const { data: { body: { cliente }, statusCode } } = await api.post('/users/create', user);
+              const med = {
+                idMedicamento: medicine.value,
+                horaGerenciamento: date,
+              };
+              const {
+                data: { statusCode },
+              } = await api.post("/medicines/create", med);
 
               if (statusCode === 201) {
-                toast('Conta criada com sucesso!', {
-                  icon: '👏',
+                toast("Medicamento adicionado na agenda com sucesso!", {
+                  icon: "👏",
                   style: {
-                    borderRadius: '10px',
-                    background: '#333',
-                    color: '#fff',
+                    borderRadius: "10px",
+                    background: "#333",
+                    color: "#fff",
                   },
                 });
               }
             } catch (error) {
               const errors = error.response.data.errors;
-              const message = errors.map((error) =>  error.message).join(', ')
+              const message = errors.map((error) => error.message).join(", ");
               toast.error(message, {
                 style: {
-                  borderRadius: '10px',
-                  background: '#333',
-                  color: '#fff',
+                  borderRadius: "10px",
+                  background: "#333",
+                  color: "#fff",
                 },
               });
             }
@@ -83,37 +104,38 @@ const RegisterMedicine = () => {
             isSubmitting,
           }) => (
             <form id="formCadastro" onSubmit={handleSubmit}>
-              <label htmlFor="name">Nome</label>
-              <input
-                id="medicinename"
-                name="name"
-                placeholder="Input Medicine Name"
-                type="text"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.name}
-                className={touched.name && errors.name ? 'input-error' : null}
-                required
-              />
-              {touched.name && errors.name ? (
-                <small className="small-error">{errors.name}</small>
-              ): null}
+              <div
+                style={{
+                  display: "flex",
+                  marginBottom: 20,
+                }}
+              >
+                <TextField
+                  id="outlined-basic"
+                  defaultValue="04:20"
+                  type="time"
+                  placeholder="Hora"
+                  className="input"
+                  variant="outlined"
+                  onChange={(e) => setDate(e.target.value)}
+                />
+              </div>
+              <div>
+                <AsyncPaginate
+                  className="input"
+                  placeholder="Medicamento"
+                  value={medicine}
+                  loadOptions={fetchMedicines}
+                  onChange={setMedicine}
+                  additional={{
+                    page: 1,
+                  }}
+                />
+              </div>
 
-              <label htmlFor="cpf">Cpf</label>
-              <input
-                id="medicinepharmaceutical"
-                name="pharmaceutical"
-                placeholder="Input Pharmaceutical Name"
-                type="text"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.cpf}
-                className={touched.cpf && errors.cpf ? 'input-error' : ''}
-                required
-              />
               {touched.cpf && errors.cpf ? (
                 <small className="small-error">{errors.cpf}</small>
-              ): null}
+              ) : null}
 
               <button type="submit" className="btn btn-primary">
                 <b>Register</b>
@@ -124,8 +146,7 @@ const RegisterMedicine = () => {
       </div>
       <Toaster position="bottom-center" reverseOrder={false} />
     </div>
-    );
-}
+  );
+};
 
-
-export default RegisterMedicine
+export default RegisterMedicine;
