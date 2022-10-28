@@ -26,7 +26,7 @@ const Login = ({ setToken }) =>{
                             }}
                             validationSchema={Yup.object({
                                 cpf: Yup.string().required().min(13).max(15).matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'cpf must match the following: xxx.xxx.xxx-xx.'),
-                                password: Yup.string().required().min(8).max(50).matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/, 'password must be at least 8 characters containing letters, numbers and at least one special character.'),
+                                password: Yup.string().required().min(8).max(50),
                             })}
                             onSubmit={async (values, { setSubmitting }) => {
                                 const { cpf, password: senha } = values;
