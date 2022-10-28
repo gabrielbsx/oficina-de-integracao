@@ -4,6 +4,7 @@ import Main from './pages/Main/index'
 import Login from './pages/Login/index';
 import Register from './pages/Register/index'
 import Refactor from './pages/RefactoryPassword/index';
+import RegisterMedicine from './pages/RegisterMedicine/index';
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path='/login' element={<Login setToken={setToken} />} />
           <Route path='/register' element={<Register />} />
           <Route path='/refactorpassword' element={<Refactor />} />
+          <Route path='/registermedicine' element={<RegisterMedicine />} />
         </Routes>
       ): (
         <>
