@@ -4,6 +4,7 @@ import Cliente from 'App/Models/Cliente'
 import UserCreateValidator from 'App/Validators/UserCreateValidator'
 import UserRecoveryValidator from 'App/Validators/UserRecoveryValidator'
 import IUserCreate from '../../interfaces/user-create'
+import generator from 'generate-password'
 
 export default class UsersController {
   public async create({ request, response }: HttpContextContract) {
@@ -33,10 +34,20 @@ export default class UsersController {
     await request.validate(UserRecoveryValidator)
     const { cpf } = request.only(['cpf']) as UserRecovery
     const cliente = await Cliente.query().where('cpf', cpf).firstOrFail()
+    const password = generator.generate({
+      length: 10,
+      uppercase: true,
+      lowercase: true,
+      symbols: true,
+    })
+    cliente.password = password
+    await cliente.save()
     return response.ok({
       statusCode: 200,
       body: {
-        message: `uma nova senha foi enviada ao e-mail: ${cliente.email}`,
+        // message: `uma nova senha foi enviada ao e-mail: ${cliente.email}`,
+        cpf: cliente.cpf,
+        password,
       },
     })
   }
