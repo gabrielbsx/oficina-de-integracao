@@ -38,5 +38,4 @@ export const profiler: ProfilerConfig = {
   whitelist: [],
 }
 
-export const validator: ValidatorConfig = {
-}
+export const validator: ValidatorConfig = {}

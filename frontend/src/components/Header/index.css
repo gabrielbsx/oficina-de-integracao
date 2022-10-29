@@ -1,0 +1,28 @@
+.Header {
+	display: flex;
+	justify-content: space-between;
+	padding: 16px 32px;
+	align-items: center;
+	background-color: red;
+}
+
+.Header h2 {
+	color: white;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.Header-logo {
+	display: flex;
+	align-items: center;
+}
+
+.Header-logo img {
+	margin: 0px;
+	width: 18%;
+}
+
+.Header-btns span {
+	font-size: 22px;
+	margin-left: 48px;
+	color: white;
+}
