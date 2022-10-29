@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import api from "../../api";
 import "./index.css";
 import toast, { Toaster } from "react-hot-toast";
+import trash from '../../assets/trash-white.png'
 
 const RegisterMedicine = () => {
 
@@ -15,6 +16,10 @@ const RegisterMedicine = () => {
       <div className="edit">
 
         <h1>Editar Medicamento</h1>
+
+        <button type="submit" className="trash-btn">
+          <img src={trash} alt="Lixeira"/>
+        </button>
 
 		    <Formik
           initialValues={{

@@ -48,6 +48,23 @@ input, label {
     color: white;
 }
 
+.trash-btn {
+    border: none;
+    padding: 10px;
+    display: block;
+    margin-left: 69%;
+    background-color: red;
+    border-radius: 4px;
+    margin-top: -190px;
+    margin-bottom: 130px;
+    cursor: pointer;
+}
+
+.trash-btn img {
+    width: 30px;
+    height: 30px;
+}
+
 .edit input {
     width: 40vw;
     font-size: 18px;
