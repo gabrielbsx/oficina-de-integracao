@@ -53,4 +53,14 @@ export default class MedicinesController {
       },
     })
   }
+  public async delete({ response, params }: HttpContextContract) {
+    const gerenciamento = await Gerenciamento.findOrFail(params.id)
+    await gerenciamento.delete()
+    return response.ok({
+      statusCode: 200,
+      body: {
+        message: 'medicamento removido com sucesso',
+      },
+    })
+  }
 }
