@@ -2,6 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Gerenciamento from 'App/Models/Gerenciamento'
 import Medicamento from 'App/Models/Medicamento'
 import CreateMedicineValidator from 'App/Validators/CreateMedicineValidator'
+import { DateTime } from 'luxon'
 
 export default class MedicinesController {
   public async create({ response, auth, request }: HttpContextContract) {
@@ -12,8 +13,8 @@ export default class MedicinesController {
     ]) as { idMedicamento: number; horaGerenciamento: Date }
     const gerenciamento = new Gerenciamento()
     gerenciamento.idMedicamento = idMedicamento
-    gerenciamento.horaGerenciamento = horaGerenciamento
-    gerenciamento.idCliente = auth.use('api').user!.id
+    gerenciamento.horaGerenciamento = DateTime.fromJSDate(horaGerenciamento)
+    gerenciamento.idCliente = await auth.use('api').user!.id
     await gerenciamento.save()
     return response.created({
       statusCode: 200,
