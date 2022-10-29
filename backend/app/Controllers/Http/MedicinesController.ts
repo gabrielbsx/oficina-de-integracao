@@ -53,4 +53,30 @@ export default class MedicinesController {
       },
     })
   }
+  public async delete({ response, params }: HttpContextContract) {
+    const gerenciamento = await Gerenciamento.findOrFail(params.id)
+    await gerenciamento.delete()
+    return response.ok({
+      statusCode: 200,
+      body: {
+        message: 'medicamento removido com sucesso',
+      },
+    })
+  }
+  public async update({ response, params, request }: HttpContextContract) {
+    const gerenciamento = await Gerenciamento.findOrFail(params.id)
+    const { idMedicamento, horaGerenciamento } = request.only([
+      'idMedicamento',
+      'horaGerenciamento',
+    ]) as { idMedicamento: number; horaGerenciamento: Date }
+    gerenciamento.idMedicamento = idMedicamento
+    gerenciamento.horaGerenciamento = DateTime.fromJSDate(horaGerenciamento)
+    await gerenciamento.save()
+    return response.ok({
+      statusCode: 200,
+      body: {
+        message: 'medicamento atualizado com sucesso',
+      },
+    })
+  }
 }

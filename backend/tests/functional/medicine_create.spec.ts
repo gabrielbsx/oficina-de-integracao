@@ -14,7 +14,7 @@ test.group('MedicinesController Create', (group) => {
     const cpf = '123.123.123-12'
     const password = 'any_senha'
     await Cliente.query().where('cpf', cpf).delete()
-    await Cliente.create({
+    const cliente = await Cliente.create({
       nome: 'any_nome',
       email: 'any_email@mail.com',
       cpf,
@@ -37,5 +37,6 @@ test.group('MedicinesController Create', (group) => {
       .header('Authorization', bearer)
       .json(medicine)
     responseMedCreate.assertStatus(201)
+    await cliente.delete()
   })
 })
