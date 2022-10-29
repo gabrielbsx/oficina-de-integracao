@@ -44,4 +44,7 @@
 
 .spanlogin{
     color: black;
+    cursor: pointer;
+    margin-top: 8px;
+    text-decoration: underline;
 }

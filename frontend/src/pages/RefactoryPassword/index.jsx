@@ -16,13 +16,13 @@ const Refactor = () =>{
             <div className="Login container mt-4">
                 <div className="row justify-content-center">
                     <div className="col-6">
-                        <h1>Recovery your password</h1>
+                        <h1>Recupere sua senha</h1>
                         <Formik
                             initialValues={{
                                 cpf: '',
                             }}
                             validationSchema={Yup.object({
-                                cpf: Yup.string().required().min(13).max(15).matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'cpf must match the following: xxx.xxx.xxx-xx.'),
+                                cpf: Yup.string().required().min(13).max(15).matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'Cpf deve corresponder ao seguinte formato: xxx.xxx.xxx-xx.'),
                             })}
                             onSubmit={async (values, { setSubmitting }) => {
                                 const { cpf } = values;
@@ -63,7 +63,7 @@ const Refactor = () =>{
                                             name="cpf"
                                             className="form-control"
                                             id="inputEmail"
-                                            placeholder='Input your cpf'
+                                            placeholder='Escreva seu E-mail'
                                             onBlur={handleBlur}
                                             onChange={handleChange}
                                             value={values.cpf}
@@ -78,7 +78,7 @@ const Refactor = () =>{
                                         </div>
                                     )}
 
-                                    <button type="submit">Send</button>
+                                    <button type="submit">Recuperar</button>
                                 </form>
                             )}
                         </Formik>

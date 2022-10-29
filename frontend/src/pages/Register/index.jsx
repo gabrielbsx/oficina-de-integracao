@@ -10,9 +10,9 @@ const Register = () => {
     <div>
       <Header screem="Register"></Header>
 
-      <div className="cadastro">
+      <div className="register-user">
         <h1>Register</h1>
-        <p className="descricao">
+        <p className="description">
           Como a sua conta, você poderá gerenciar suas coleções em flash cards.
         </p>
 
@@ -27,22 +27,22 @@ const Register = () => {
           }}
           validationSchema={Yup.object({
             name: Yup.string().required().max(50),
-            cpf: Yup.string().required().min(13).max(15).matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'cpf must match the following: xxx.xxx.xxx-xx.'),
+            cpf: Yup.string().required().min(13).max(15).matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'Cpf deve corresponder ao seguinte formato: xxx.xxx.xxx-xx.'),
             date: Yup.date().required(),
             email: Yup.string().required().email(),
-            password: Yup.string().required().min(8).max(50).matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/, 'password must be at least 8 characters containing letters, numbers and at least one special character.'),
-            repeatPassword: Yup.string().required().oneOf([Yup.ref('password'), null], 'password confirmation must be equals password'),
+            password: Yup.string().required().min(8).max(50).matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/, 'A senha deve ter pelo menos 8 caracteres contendo letras, números e pelo menos um caractere especial.'),
+            repeatPassword: Yup.string().required().oneOf([Yup.ref('password'), null], 'Confirmação de senha deve ser igual a senha'),
           })}
           onSubmit={async (values, { setSubmitting }) => {
             const {
-              name: nome,
+              name: name_user,
               cpf,
               email,
               date: data_nascimento,
               password: senha,
               repeatPassword: confirmacao_senha,
             } = values;
-            const user = { nome, email, cpf, data_nascimento, senha, confirmacao_senha };
+            const user = { name_user, email, cpf, data_nascimento, senha, confirmacao_senha };
             
             try {
               const { data: { body: { cliente }, statusCode } } = await api.post('/users/create', user);
@@ -79,12 +79,12 @@ const Register = () => {
             handleSubmit,
             isSubmitting,
           }) => (
-            <form id="formCadastro" onSubmit={handleSubmit}>
-              <label htmlFor="name">Nome</label>
+            <form id="formRegister" onSubmit={handleSubmit}>
+              <label htmlFor="name">Name_user</label>
               <input
                 id="username"
                 name="name"
-                placeholder="Input your name"
+                placeholder="Escreva seu nome"
                 type="text"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -100,7 +100,7 @@ const Register = () => {
               <input
                 id="usercpf"
                 name="cpf"
-                placeholder="Input your CPF"
+                placeholder="Escreva seu CPF"
                 type="text"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -116,7 +116,7 @@ const Register = () => {
               <input
                 id="userdate"
                 name="date"
-                placeholder="Input your birth date"
+                placeholder="Selecione sua data de nascimento"
                 type="date"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -132,7 +132,7 @@ const Register = () => {
               <input
                 id="userEmail"
                 name="email"
-                placeholder="Input your e-mail"
+                placeholder="Escreva seu e-mail"
                 type="email"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -149,7 +149,7 @@ const Register = () => {
                 id="userpassword"
                 name="password"
                 type="password"
-                placeholder="Input your password"
+                placeholder="Escreva sua senha"
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.password}
@@ -159,9 +159,9 @@ const Register = () => {
               {touched.password && errors.password ? (
                 <small className="small-error">{errors.password}</small>
               ): null}
-              <p className="condicaosenha">
-                Use at least 8 characters containing letters, numbers and at least
-                one special character
+              <p className="password-condition">
+                Use pelo menos 8 caracteres contendo letras, números e pelo menos
+                um caractere especial
               </p>
 
               <label htmlFor="repeat-password">Repetir a Senha</label>
@@ -169,7 +169,7 @@ const Register = () => {
                 id="userpasswordConfirm"
                 name="repeatPassword"
                 type="password"
-                placeholder="Confirm your password"
+                placeholder="Confirme sua senha"
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.repeatPassword}
@@ -181,7 +181,7 @@ const Register = () => {
               ): null}
 
               <button type="submit" className="btn btn-primary">
-                <b>Sign Up</b>
+                <b>Registre-se</b>
               </button>
             </form>
           )}

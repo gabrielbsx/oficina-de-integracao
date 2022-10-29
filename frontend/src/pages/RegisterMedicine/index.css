@@ -2,7 +2,7 @@ input, label {
     display: block;
 }
 
-.cadastro h1 {
+.register h1 {
     font-size: 48px;
     text-align: center;
     margin-top: 120px;
@@ -11,7 +11,7 @@ input, label {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.cadastro .descricao {
+.register .descricao {
     text-align: center;
     margin: 16px 0px 64px 0px;
     font-size: 24px;
@@ -19,26 +19,26 @@ input, label {
     font-family:Arial, Helvetica, sans-serif;
 }
 
-.cadastro form {
+.register form {
     width: 40vw;
     margin: 0 auto;
 }
 
-.cadastro label {
+.register label {
     font-size: 24px;
     margin: 24px 0px 8px 0px;
     font-family: Arial, Helvetica, sans-serif;
     color: white;
 }
 
-.cadastro input {
+.register input {
     width: 40vw;
     font-size: 18px;
     padding: 12px;
     border-radius: 8px;
 }
 
-.cadastro .condicaosenha{
+.register .condicaosenha{
     margin-top: .5rem;
     color: #868e96;
 }
@@ -47,7 +47,7 @@ input, label {
     color: #ed373a;
 }
 
-.cadastro button {
+.register button {
     border: none;
     font-size: 24px;
     color: #fff;
@@ -57,6 +57,7 @@ input, label {
     background-color: red;
     width: 180px;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 .input-error {

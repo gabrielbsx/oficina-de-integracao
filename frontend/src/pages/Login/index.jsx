@@ -25,7 +25,7 @@ const Login = ({ setToken }) =>{
                                 password: '',
                             }}
                             validationSchema={Yup.object({
-                                cpf: Yup.string().required().min(13).max(15).matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'cpf must match the following: xxx.xxx.xxx-xx.'),
+                                cpf: Yup.string().required().min(13).max(15).matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'Cpf deve corresponder ao seguinte formato: xxx.xxx.xxx-xx.'),
                                 password: Yup.string().required().min(8).max(50),
                             })}
                             onSubmit={async (values, { setSubmitting }) => {
@@ -78,7 +78,7 @@ const Login = ({ setToken }) =>{
                                             name="cpf"
                                             className="form-control"
                                             id="inputEmail"
-                                            placeholder='Input your cpf'
+                                            placeholder="Escreva seu nome"
                                             value={values.cpf}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
@@ -94,7 +94,7 @@ const Login = ({ setToken }) =>{
                                             name="password"
                                             className="form-control"
                                             id="inputPassword"
-                                            placeholder='Input your password'
+                                            placeholder="Escreva sua senha"
                                             value={values.password}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
@@ -104,9 +104,9 @@ const Login = ({ setToken }) =>{
                                         ): null}
                                     </div>
 
-                                    <span className="spanlogin" onClick={() => navegar('/refactorpassword')}>Forgot your password?</span>
+                                    <span className="spanlogin" onClick={() => navegar('/refactorpassword')}>Esqueceu sua senha?</span>
 
-                                    <button type="submit">Enter</button>
+                                    <button type="submit">Entrar</button>
                                 </form>
                             )}
                         </Formik>
