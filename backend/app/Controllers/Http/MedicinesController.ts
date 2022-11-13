@@ -68,9 +68,9 @@ export default class MedicinesController {
     const { idMedicamento, horaGerenciamento } = request.only([
       'idMedicamento',
       'horaGerenciamento',
-    ]) as { idMedicamento: number; horaGerenciamento: Date }
+    ]) as { idMedicamento: number; horaGerenciamento: DateTime }
     gerenciamento.idMedicamento = idMedicamento
-    gerenciamento.horaGerenciamento = DateTime.fromJSDate(horaGerenciamento)
+    gerenciamento.horaGerenciamento = horaGerenciamento
     await gerenciamento.save()
     return response.ok({
       statusCode: 200,
