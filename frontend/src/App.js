@@ -26,8 +26,9 @@ function App() {
           </Routes>
         ) : (
           <Routes>
-            <Route path="/" element={<RegisterMedicine />} />
-            <Route path="/editmedicine" element={<EditMedicine />} />
+            <Route path="/" element={<Medicines />} />
+            <Route path="/registermedicine" element={<RegisterMedicine />} />
+            <Route path="/editmedicine/:id" element={<EditMedicine />} />
           </Routes>
         )}
       </BrowserRouter>
