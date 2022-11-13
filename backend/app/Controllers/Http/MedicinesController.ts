@@ -79,4 +79,14 @@ export default class MedicinesController {
       },
     })
   }
+  public async getById({ response, params }: HttpContextContract) {
+    const gerenciamento = await Gerenciamento.findOrFail(params.id)
+    await gerenciamento.load('medicamento')
+    return response.ok({
+      statusCode: 200,
+      body: {
+        gerenciamento,
+      },
+    })
+  }
 }
