@@ -7,12 +7,25 @@ import Refactor from "./pages/RefactoryPassword/index";
 import RegisterMedicine from "./pages/RegisterMedicine/index";
 import EditMedicine from "./pages/EditMedicine/index";
 import { useEffect, useState } from "react";
+import api from "./api";
+import Medicines from "./pages/Medicines";
 
 function App() {
   const [token, setToken] = useState();
   document.title = "Medicine Manager";
   useEffect(() => {
-    setToken(localStorage.getItem("token"));
+    const getAccount = async () => {
+      const token = localStorage.getItem("token");
+      setToken(token);
+      try {
+        const { data } = await api.get('/users/verify');
+        console.log(data);
+      } catch (error) {
+        localStorage.removeItem("token");
+        setToken(null);
+      }
+    }
+    getAccount();
   }, [token]);
   return (
     <div className="App">
