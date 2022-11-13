@@ -10,10 +10,10 @@ export default class MedicinesController {
     const { idMedicamento, horaGerenciamento } = request.only([
       'idMedicamento',
       'horaGerenciamento',
-    ]) as { idMedicamento: number; horaGerenciamento: Date }
+    ]) as { idMedicamento: number; horaGerenciamento: DateTime }
     const gerenciamento = new Gerenciamento()
     gerenciamento.idMedicamento = idMedicamento
-    gerenciamento.horaGerenciamento = DateTime.fromJSDate(horaGerenciamento)
+    gerenciamento.horaGerenciamento = horaGerenciamento
     gerenciamento.idCliente = await auth.use('api').user!.id
     await gerenciamento.save()
     return response.created({
