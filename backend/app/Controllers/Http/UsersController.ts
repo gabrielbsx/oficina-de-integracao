@@ -51,4 +51,13 @@ export default class UsersController {
       },
     })
   }
+  public async verify({ auth, response }: HttpContextContract) {
+    await auth.use('api').authenticate()
+    return response.ok({
+      statusCode: 200,
+      body: {
+        message: 'usuário autenticado!',
+      },
+    })
+  }
 }
