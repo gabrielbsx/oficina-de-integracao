@@ -68,7 +68,7 @@ test.group('MedicinesController Create', (group) => {
     const { body } = responseAuth.body()
     const bearer = `Bearer ${body.cliente.token}`
     const response = await client
-      .delete(route('medicines/delete', { id: 1000000000000000000000 }))
+      .delete(route('medicines/delete', { id: 'invalid_id' }))
       .header('Authorization', bearer)
     response.assertStatus(404)
     response.assertBodyContains({
