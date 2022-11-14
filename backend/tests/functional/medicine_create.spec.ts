@@ -7,6 +7,29 @@ test.group('MedicinesController Create', (group) => {
     await Database.beginGlobalTransaction()
     return () => Database.rollbackGlobalTransaction()
   })
+  test('should returns a statusCode 401 and message error if user is unauthorized', async ({
+    client,
+    route,
+  }) => {
+    const medicineRow = await Database.from('medicamentos').first()
+    const medicine = {
+      idMedicamento: medicineRow.id,
+      horaGerenciamento: '10:20',
+    }
+    const bearer = `Bearer unauthorized_token`
+    const responseMedCreate = await client
+      .post(route('medicines/create'))
+      .header('Authorization', bearer)
+      .json(medicine)
+    responseMedCreate.assertStatus(401)
+    responseMedCreate.assertBodyContains({
+      errors: [
+        {
+          message: 'E_UNAUTHORIZED_ACCESS: Unauthorized access',
+        },
+      ],
+    })
+  })
   test('should returns a statusCode 200 if medicine is created on management medicine schedule', async ({
     client,
     route,
