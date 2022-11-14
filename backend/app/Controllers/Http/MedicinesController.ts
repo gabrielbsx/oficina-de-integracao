@@ -10,10 +10,10 @@ export default class MedicinesController {
     const { idMedicamento, horaGerenciamento } = request.only([
       'idMedicamento',
       'horaGerenciamento',
-    ]) as { idMedicamento: number; horaGerenciamento: Date }
+    ]) as { idMedicamento: number; horaGerenciamento: DateTime }
     const gerenciamento = new Gerenciamento()
     gerenciamento.idMedicamento = idMedicamento
-    gerenciamento.horaGerenciamento = DateTime.fromJSDate(horaGerenciamento)
+    gerenciamento.horaGerenciamento = horaGerenciamento
     gerenciamento.idCliente = await auth.use('api').user!.id
     await gerenciamento.save()
     return response.created({
@@ -68,14 +68,24 @@ export default class MedicinesController {
     const { idMedicamento, horaGerenciamento } = request.only([
       'idMedicamento',
       'horaGerenciamento',
-    ]) as { idMedicamento: number; horaGerenciamento: Date }
+    ]) as { idMedicamento: number; horaGerenciamento: DateTime }
     gerenciamento.idMedicamento = idMedicamento
-    gerenciamento.horaGerenciamento = DateTime.fromJSDate(horaGerenciamento)
+    gerenciamento.horaGerenciamento = horaGerenciamento
     await gerenciamento.save()
     return response.ok({
       statusCode: 200,
       body: {
         message: 'medicamento atualizado com sucesso',
+      },
+    })
+  }
+  public async getById({ response, params }: HttpContextContract) {
+    const gerenciamento = await Gerenciamento.findOrFail(params.id)
+    await gerenciamento.load('medicamento')
+    return response.ok({
+      statusCode: 200,
+      body: {
+        gerenciamento,
       },
     })
   }

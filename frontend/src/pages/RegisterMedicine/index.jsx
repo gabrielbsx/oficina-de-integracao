@@ -48,7 +48,15 @@ const RegisterMedicine = () => {
         };
       }
     } catch (error) {
-      console.log(error);
+      const errors = error.response.data.errors;
+      const message = errors.map((error) =>  error.message).join(', ')
+      toast.error(message, {
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
     }
   };
 
@@ -71,7 +79,7 @@ const RegisterMedicine = () => {
                 data: { statusCode },
               } = await api.post("/medicines/create", med);
 
-              if (statusCode === 201) {
+              if (statusCode === 200) {
                 toast("Medicamento adicionado na agenda com sucesso!", {
                   icon: "👏",
                   style: {

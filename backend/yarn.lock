@@ -753,6 +753,13 @@
   dependencies:
     "@types/node" "*"
 
+"@types/generate-password@^1.5.1":
+  "integrity" "sha512-VGu9m+z/Itv9GzdiB9VCD3Y2f5VX+tI7OXE/ttBtQPPokl3eIVdahslvK7C18zhjbSoq3yzFbbDzEFwvBwa3bw=="
+  "resolved" "https://registry.npmjs.org/@types/generate-password/-/generate-password-1.5.1.tgz"
+  "version" "1.5.1"
+  dependencies:
+    "generate-password" "*"
+
 "@types/glob@^7.1.1":
   "integrity" "sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA=="
   "resolved" "https://registry.npmjs.org/@types/glob/-/glob-7.2.0.tgz"
@@ -2635,6 +2642,11 @@
     "string-width" "^4.2.3"
     "strip-ansi" "^6.0.1"
     "wide-align" "^1.1.5"
+
+"generate-password@*", "generate-password@^1.7.0":
+  "integrity" "sha512-WPCtlfy0jexf7W5IbwxGUgpIDvsZIohbI2DAq2Q6TSlKKis+G4GT9sxvPxrZUGL8kP6WUXMWNqYnxY6DDKAdFA=="
+  "resolved" "https://registry.npmjs.org/generate-password/-/generate-password-1.7.0.tgz"
+  "version" "1.7.0"
 
 "get-func-name@^2.0.0":
   "integrity" "sha512-Hm0ixYtaSZ/V7C8FJrtZIuBBI+iSgL+1Aq82zSu8VQNB4S3Gk8e7Qs3VwBDJAhmRZcFqkl3tQu36g/Foh5I5ig=="
