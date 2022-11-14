@@ -62,6 +62,7 @@ const RegisterMedicine = () => {
   const fetchEditMedicine = async () => {
     try {
       const { data } = await api.get(`/medicines/get-by-id/${id}`);
+      console.log(id, data);
       if (data.statusCode === 200) {
         setDate(data.body.gerenciamento.hora_gerenciamento);
         setSelectedMedicine(data.body.gerenciamento.medicamento.id);
@@ -96,9 +97,8 @@ const RegisterMedicine = () => {
             const med = { horaGerenciamento: date, idMedicamento: medicine.value };
             try {
               const {
-                data: { body: statusCode },
+                data: { body: statusCode }
               } = await api.put(`/medicines/update/${id}`, med);
-              console.log(statusCode);
 
               if (statusCode === 200) {
                 toast("Medicamento editado com sucesso!", {
@@ -149,7 +149,7 @@ const RegisterMedicine = () => {
               <label htmlFor="time">Hora</label>
               <TextField
                   id="outlined-basic"
-                  defaultValue={date}
+                  value={date}
                   type="time"
                   placeholder="Hora"
                   className="input"
