@@ -43,6 +43,48 @@ test.group('MedicinesController Create', (group) => {
     await cliente.delete()
     await management.delete()
   })
+  test('should returns a statusCode 404 and a message error if user is not owner of management medicine', async ({
+    client,
+    route,
+  }) => {
+    const medicine = await Medicamento.query().firstOrFail()
+    const cliente = new Cliente()
+    const password = 'any_senha'
+    cliente.nome = 'any_nome'
+    cliente.email = 'any_email_rand@mail.com'
+    cliente.cpf = '123.123.123-18'
+    cliente.password = password
+    cliente.dataNascimento = new Date()
+    await cliente.save()
+    const clienteInvalid = new Cliente()
+    clienteInvalid.nome = 'any_nome'
+    clienteInvalid.email = 'any_email_rand@mail.com'
+    clienteInvalid.cpf = '123.123.123-72'
+    clienteInvalid.password = password
+    clienteInvalid.dataNascimento = new Date()
+    await clienteInvalid.save()
+    const management = new Gerenciamento()
+    management.horaGerenciamento = DateTime.now()
+    management.idMedicamento = medicine.id
+    management.idCliente = cliente.id
+    await management.save()
+    const responseAuth = await client.post(route('signin')).json({
+      cpf: clienteInvalid.cpf,
+      senha: password,
+    })
+    const { body } = responseAuth.body()
+    const bearer = `Bearer ${body.cliente.token}`
+    const response = await client
+      .delete(route('medicines/delete', { id: management!.id }))
+      .header('Authorization', bearer)
+    response.assertStatus(404)
+    response.assertBodyContains({
+      message: 'E_ROW_NOT_FOUND: Row not found',
+    })
+    await cliente.delete()
+    await clienteInvalid.delete()
+    await management.delete()
+  })
   test('should returns a statusCode 404 and a message error if management medicine is not exists or invalid', async ({
     client,
     route,
