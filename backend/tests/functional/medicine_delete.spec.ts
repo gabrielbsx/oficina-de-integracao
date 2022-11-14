@@ -43,7 +43,7 @@ test.group('MedicinesController Create', (group) => {
     await cliente.delete()
     await management.delete()
   })
-  test('should returns a statusCode 404 and a message error if management medicine is not exists', async ({
+  test('should returns a statusCode 404 and a message error if management medicine is not exists or invalid', async ({
     client,
     route,
   }) => {
