@@ -1,12 +1,12 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Gerenciamento from 'App/Models/Gerenciamento'
 import Medicamento from 'App/Models/Medicamento'
-import CreateMedicineValidator from 'App/Validators/CreateMedicineValidator'
+import CreateUpdateMedicineValidator from 'App/Validators/CreateUpdateMedicineValidator'
 import { DateTime } from 'luxon'
 
 export default class MedicinesController {
   public async create({ response, auth, request }: HttpContextContract) {
-    await request.validate(CreateMedicineValidator)
+    await request.validate(CreateUpdateMedicineValidator)
     const { idMedicamento, horaGerenciamento } = request.only([
       'idMedicamento',
       'horaGerenciamento',
@@ -53,8 +53,11 @@ export default class MedicinesController {
       },
     })
   }
-  public async delete({ response, params }: HttpContextContract) {
-    const gerenciamento = await Gerenciamento.findOrFail(params.id)
+  public async delete({ response, auth, params }: HttpContextContract) {
+    const gerenciamento = await Gerenciamento.query()
+      .where('id', params.id)
+      .andWhere('id_cliente', auth.use('api').user!.id)
+      .firstOrFail()
     await gerenciamento.delete()
     return response.ok({
       statusCode: 200,
@@ -63,8 +66,12 @@ export default class MedicinesController {
       },
     })
   }
-  public async update({ response, params, request }: HttpContextContract) {
-    const gerenciamento = await Gerenciamento.findOrFail(params.id)
+  public async update({ response, auth, params, request }: HttpContextContract) {
+    await request.validate(CreateUpdateMedicineValidator)
+    const gerenciamento = await Gerenciamento.query()
+      .where('id', params.id)
+      .andWhere('id_cliente', auth.use('api').user!.id)
+      .firstOrFail()
     const { idMedicamento, horaGerenciamento } = request.only([
       'idMedicamento',
       'horaGerenciamento',
@@ -79,8 +86,11 @@ export default class MedicinesController {
       },
     })
   }
-  public async getById({ response, params }: HttpContextContract) {
-    const gerenciamento = await Gerenciamento.findOrFail(params.id)
+  public async getById({ response, auth, params }: HttpContextContract) {
+    const gerenciamento = await Gerenciamento.query()
+      .where('id', params.id)
+      .andWhere('id_cliente', auth.use('api').user!.id)
+      .firstOrFail()
     await gerenciamento.load('medicamento')
     return response.ok({
       statusCode: 200,
