@@ -112,6 +112,46 @@ test.group('MedicinesController Create', (group) => {
     })
     await cliente.delete()
   })
+  test('should returns a statusCode 422 and a message error if medicine is invalid', async ({
+    client,
+    route,
+  }) => {
+    const cpf = '123.123.123-23'
+    const password = 'any_senha'
+    await Cliente.query().where('cpf', cpf).delete()
+    const cliente = await Cliente.create({
+      nome: 'any_nome',
+      email: 'any_email@mail.com',
+      cpf,
+      password: password,
+      dataNascimento: new Date(),
+    })
+    const responseAuth = await client.post(route('signin')).json({
+      cpf,
+      senha: password,
+    })
+    const { body } = responseAuth.body()
+    const bearer = `Bearer ${body.cliente.token}`
+    const medicine = {
+      idMedicamento: 'invalid_id',
+      horaGerenciamento: '14:20',
+    }
+    const responseMedCreate = await client
+      .post(route('medicines/create'))
+      .header('Authorization', bearer)
+      .json(medicine)
+    responseMedCreate.assertStatus(422)
+    responseMedCreate.assertBodyContains({
+      errors: [
+        {
+          field: 'idMedicamento',
+          message: 'number validation failed',
+          rule: 'number',
+        },
+      ],
+    })
+    await cliente.delete()
+  })
   test('should returns a statusCode 200 if medicine is created on management medicine schedule', async ({
     client,
     route,
