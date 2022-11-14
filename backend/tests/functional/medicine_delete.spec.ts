@@ -10,6 +10,39 @@ test.group('MedicinesController Create', (group) => {
     await Database.beginGlobalTransaction()
     return () => Database.rollbackGlobalTransaction()
   })
+  test('should returns a statusCode 401 and a message error if user is unauthorized', async ({
+    client,
+    route,
+  }) => {
+    const medicine = await Medicamento.query().firstOrFail()
+    const cliente = new Cliente()
+    const password = 'any_senha'
+    cliente.nome = 'any_nome'
+    cliente.email = 'any_email_rand@mail.com'
+    cliente.cpf = '123.123.123-18'
+    cliente.password = password
+    cliente.dataNascimento = new Date()
+    await cliente.save()
+    const management = new Gerenciamento()
+    management.horaGerenciamento = DateTime.now()
+    management.idMedicamento = medicine.id
+    management.idCliente = cliente.id
+    await management.save()
+    const bearer = `Bearer invalid_token`
+    const response = await client
+      .delete(route('medicines/delete', { id: management!.id }))
+      .header('Authorization', bearer)
+    response.assertStatus(401)
+    response.assertBodyContains({
+      errors: [
+        {
+          message: 'E_UNAUTHORIZED_ACCESS: Unauthorized access',
+        },
+      ],
+    })
+    await cliente.delete()
+    await management.delete()
+  })
   test('should returns a statusCode 200 if medicine is deleted', async ({ client, route }) => {
     const medicine = await Medicamento.query().firstOrFail()
     const cliente = new Cliente()
