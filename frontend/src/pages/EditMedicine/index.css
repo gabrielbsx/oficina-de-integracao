@@ -45,7 +45,7 @@ input, label {
     font-size: 24px;
     margin: 24px 0px 8px 0px;
     font-family: Arial, Helvetica, sans-serif;
-    color: white;
+    color: #111;
 }
 
 .trash-btn {
