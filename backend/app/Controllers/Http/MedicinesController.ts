@@ -24,8 +24,10 @@ export default class MedicinesController {
     })
   }
   public async all({ request, response, auth }: HttpContextContract) {
-    const page = request.input('page', 1)
-    const limit = request.input('limit', 10)
+    let page = request.input('page', 1)
+    let limit = request.input('limit', 10)
+    page = page < 1 ? 1 : page
+    limit = limit < 1 ? 1 : limit
     const gerenciamentos = await Gerenciamento.query()
       .where('id_cliente', auth.use('api').user!.id)
       .orderBy('id', 'desc')
@@ -39,8 +41,10 @@ export default class MedicinesController {
     })
   }
   public async medicines({ request, response }: HttpContextContract) {
-    const page = request.input('page', 1)
-    const limit = request.input('limit', 10)
+    let page = request.input('page', 1)
+    let limit = request.input('limit', 10)
+    page = page < 1 ? 1 : page
+    limit = limit < 1 ? 1 : limit
     const nomeMedicamento = request.input('search', '')
     const medicamentos = await Medicamento.query()
       .whereLike('nome', `%${nomeMedicamento}%`)
