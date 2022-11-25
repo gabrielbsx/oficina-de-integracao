@@ -64,7 +64,7 @@ const RegisterMedicine = () => {
     <div>
       <Header screem="RegisterMedicine"></Header>
 
-      <div className="cadastro">
+      <div className="register">
         <h1>Register Medicine</h1>
 
         <Formik
@@ -111,7 +111,7 @@ const RegisterMedicine = () => {
             handleSubmit,
             isSubmitting,
           }) => (
-            <form id="formCadastro" onSubmit={handleSubmit}>
+            <form id="formRegister" onSubmit={handleSubmit}>
               <div
                 style={{
                   display: "flex",
@@ -146,7 +146,7 @@ const RegisterMedicine = () => {
               ) : null}
 
               <button type="submit" className="btn btn-primary">
-                <b>Register</b>
+                <b>Registrar</b>
               </button>
             </form>
           )}

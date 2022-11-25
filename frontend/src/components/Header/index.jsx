@@ -8,25 +8,25 @@ const Header = ({ screem }) => {
 
 	const renderNavLinks = (screen) => {
 		switch (screen) {
-			case 'Main':
+			case 'Home':
 				return (
 					<>
-						<span onClick={() => navegar('/register')}>Sign Up</span>
-						<span onClick={() => navegar('/login')}><strong>Sign In</strong></span>
+						<span onClick={() => navegar('/register')}>Cadastre-se</span>
+						<span onClick={() => navegar('/login')}><strong>Entrar</strong></span>
 					</>
 				)
 
 			case 'Login':
 				return (
 					<>
-						<span onClick={() => navegar('/register')} ><strong>Sign Up</strong></span>
+						<span onClick={() => navegar('/register')} ><strong>Cadastrar-se</strong></span>
 					</>
 				)
 
 			case 'Register':
 				return (
 					<>
-						<span onClick={() => navegar('/Login')}><strong>Sign In</strong></span>
+						<span onClick={() => navegar('/Login')}><strong>Entrar</strong></span>
 					</>
 				)
 

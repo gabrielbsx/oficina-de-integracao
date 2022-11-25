@@ -3,19 +3,19 @@ import Header from "../../components/Header"
 import './index.css'
 import logo from '../../assets/logo.svg'
 
-const Main = () =>{
+const Home = () =>{
     return(
         <div>
-            <Header screem="Main" />
+            <Header screem="Home" />
             <div className="logo">
                 <img src={logo} alt="Logo"/>
             </div>
 
-            <div className='main'>
-                <h2>The best place for you to menage your medicines!</h2>
+            <div className='home'>
+                <h2>O melhor lugar para você administrar seus medicamentos!</h2>
             </div>
         </div>
     )
 }
 
-export default Main
+export default Home
