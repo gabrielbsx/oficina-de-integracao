@@ -60,11 +60,17 @@ input, label {
     cursor: pointer;
 }
 
-.btn{
-  background-color: red;
-  width: 120px;
-  justify-content: center;
-  text-align: center;
+.btnManage{
+    border: none;
+    font-size: 24px;
+    color: #fff;
+    padding: 12px 16px;
+    display: block;
+    margin: 32px auto;
+    background-color: red;
+    width: 120px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 .input-error {

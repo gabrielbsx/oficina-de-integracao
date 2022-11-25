@@ -70,7 +70,8 @@ const Medicines = () => {
               <TableRow>
                 <TableCell className="text">Medicamento</TableCell>
                 <TableCell>Horário</TableCell>
-                <TableCell colSpan={2}>Ações</TableCell>
+                <TableCell colSpan={2}></TableCell>
+                <TableCell colSpan={2}></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -90,7 +91,7 @@ const Medicines = () => {
                       onClick={() => {
                         navegar(`/editmedicine/${medicine.id}`);
                       }}
-                      className="btn"
+                      className="btnManage"
                     >
                       <b>Editar</b>
                     </button>
@@ -126,7 +127,7 @@ const Medicines = () => {
                           });
                         }
                       }}
-                      className="btn"
+                      className="btnManage"
                     >
                       <b>Deletar</b>
                     </button>
