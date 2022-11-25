@@ -386,4 +386,47 @@ test.group('MedicinesController Fetch', (group) => {
         await Gerenciamento.query().where('id_cliente', cliente.id).delete()
         await cliente.delete()
     })
+    test('should returns a pagination none data if paginate is called', async ({ client, route }) => {
+        const cpf = '123.123.123-23'
+        const password = 'any_senha'
+        await Cliente.query().where('cpf', cpf).delete()
+        const cliente = await Cliente.create({
+            nome: 'any_nome',
+            email: 'any_email@mail.com',
+            cpf,
+            password: password,
+            dataNascimento: new Date(),
+        })
+        const responseAuth = await client.post(route('signin')).json({
+            cpf,
+            senha: password,
+        })
+        await Gerenciamento.query().where('id_cliente', cliente.id).delete()
+        const { body } = responseAuth.body()
+        const bearer = `Bearer ${body.cliente.token}`
+        const responseMedicines = await client
+            .get(`/api/v1/medicines/all`)
+            .header('Authorization', bearer)
+        responseMedicines.assertStatus(200)
+        responseMedicines.assertBodyContains({
+            body: {
+                gerenciamentos: {
+                    meta: {
+                        total: 0,
+                        per_page: 10,
+                        current_page: 1,
+                        last_page: 1,
+                        first_page: 1,
+                        first_page_url: '/?page=1',
+                        last_page_url: '/?page=1',
+                        next_page_url: null,
+                        previous_page_url: null,
+                    },
+                    data: [],
+                }
+            }
+        })
+        await Gerenciamento.query().where('id_cliente', cliente.id).delete()
+        await cliente.delete()
+    })
 })
