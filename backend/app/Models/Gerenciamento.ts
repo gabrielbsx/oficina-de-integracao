@@ -7,22 +7,22 @@ export default class Gerenciamento extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  @column()
+  @column({ columnName: 'id_medicamento' })
   public idMedicamento: number
 
-  @column()
+  @column({ columnName: 'hora_gerenciamento' })
   public horaGerenciamento: DateTime
 
-  @column()
+  @column({ columnName: 'id_cliente' })
   public idCliente: number
 
   @belongsTo(() => Medicamento, {
-    foreignKey: 'id_medicamento',
+    foreignKey: 'idMedicamento',
   })
   public medicamento: BelongsTo<typeof Medicamento>
 
   @belongsTo(() => Cliente, {
-    foreignKey: 'id_cliente',
+    foreignKey: 'idCliente',
   })
   public cliente: BelongsTo<typeof Cliente>
 

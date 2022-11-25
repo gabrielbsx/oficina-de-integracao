@@ -29,3 +29,10 @@
 * Marina Fachin
 * Vinícius Lara
 * Gabriel Barbosa
+
+### Comandos
+  ```bash
+  backend: cd backend && npm run dev
+  frontend: cd frontend && npm run start
+  test: cd backend && npm run test
+  ````

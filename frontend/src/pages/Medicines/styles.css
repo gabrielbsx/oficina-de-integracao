@@ -1,0 +1,58 @@
+input, label {
+  display: block;
+}
+
+.medicines h1 {
+  font-size: 48px;
+  text-align: center;
+  margin-top: 120px;
+  margin-bottom: 0px;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.medicines .descricao {
+  text-align: center;
+  margin: 16px 0px 64px 0px;
+  font-size: 24px;
+  color: white;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+.medicines form {
+  width: 40vw;
+  margin: 0 auto;
+}
+
+.medicines label {
+  font-size: 24px;
+  margin: 24px 0px 8px 0px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+}
+
+.medicines input {
+  font-size: 18px;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.medicines .condicaosenha{
+  margin-top: .5rem;
+  color: #868e96;
+}
+
+.mensagem-erro {
+  color: #ed373a;
+}
+
+.medicines button {
+}
+
+.input-error {
+  border: 1px solid red;
+}
+
+.small-error {
+  color: red;
+}

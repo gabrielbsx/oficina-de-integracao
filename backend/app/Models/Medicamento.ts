@@ -13,7 +13,8 @@ export default class Medicamento extends BaseModel {
   public farmaceutica: string
 
   @hasMany(() => Gerenciamento, {
-    foreignKey: 'id_medicamento',
+    foreignKey: 'idMedicamento',
+    localKey: 'id',
   })
   public gerenciamentos: HasMany<typeof Gerenciamento>
 
