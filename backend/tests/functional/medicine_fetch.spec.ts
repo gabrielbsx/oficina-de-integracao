@@ -461,4 +461,50 @@ test.group('MedicinesController Fetch', (group) => {
         await Gerenciamento.query().where('id_cliente', cliente.id).delete()
         await cliente.delete()
     })
+    test('should returns a management medicine data if get-by-id is called with valid id', async ({ client, route }) => {
+        const cpf = '123.123.123-23'
+        const password = 'any_senha'
+        await Cliente.query().where('cpf', cpf).delete()
+        const cliente = await Cliente.create({
+            nome: 'any_nome',
+            email: 'any_email@mail.com',
+            cpf,
+            password: password,
+            dataNascimento: new Date(),
+        })
+        const responseAuth = await client.post(route('signin')).json({
+            cpf,
+            senha: password,
+        })
+        await Gerenciamento.query().where('id_cliente', cliente.id).delete()
+        const medicineRow = await Database.from('medicamentos').first()
+        const newMedicine = new Gerenciamento()
+        newMedicine.idMedicamento = medicineRow.id
+        newMedicine.idCliente = cliente.id
+        newMedicine.horaGerenciamento = '10:20' as any
+        await newMedicine.save()
+        const { body } = responseAuth.body()
+        const bearer = `Bearer ${body.cliente.token}`
+        const responseMedicines = await client
+            .get(`/api/v1/medicines/get-by-id/${newMedicine.id}`)
+            .header('Authorization', bearer)
+        responseMedicines.assertStatus(200)
+        responseMedicines.assertBodyContains({
+            body: {
+                gerenciamento: {
+                    id: newMedicine.id,
+                    id_medicamento: newMedicine.idMedicamento,
+                    id_cliente: newMedicine.idCliente,
+                    hora_gerenciamento: newMedicine.horaGerenciamento,
+                    medicamento: {
+                        id: medicineRow.id,
+                        nome: medicineRow.nome,
+                        farmaceutica: medicineRow.farmaceutica,
+                    }
+                }
+            }
+        })
+        await Gerenciamento.query().where('id_cliente', cliente.id).delete()
+        await cliente.delete()
+    })
 })
