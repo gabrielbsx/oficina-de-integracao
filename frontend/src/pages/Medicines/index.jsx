@@ -89,6 +89,16 @@ const Medicines = () => {
                   <TableCell>
                     <button
                       onClick={() => {
+                        navegar(``);
+                      }}
+                      className="btnManage"
+                    >
+                      <b>Ver</b>
+                    </button>
+                  </TableCell>
+                  <TableCell>
+                    <button
+                      onClick={() => {
                         navegar(`/editmedicine/${medicine.id}`);
                       }}
                       className="btnManage"
