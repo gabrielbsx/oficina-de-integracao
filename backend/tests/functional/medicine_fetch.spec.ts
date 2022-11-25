@@ -79,5 +79,86 @@ test.group('MedicinesController Fetch', (group) => {
         await newMedicine.delete()
         await cliente.delete()
     })
+    test('should returns a pagination data if paginate is called with limit per page', async ({ client, route }) => {
+        const cpf = '123.123.123-23'
+        const password = 'any_senha'
+        await Cliente.query().where('cpf', cpf).delete()
+        const cliente = await Cliente.create({
+            nome: 'any_nome',
+            email: 'any_email@mail.com',
+            cpf,
+            password: password,
+            dataNascimento: new Date(),
+        })
+        const responseAuth = await client.post(route('signin')).json({
+            cpf,
+            senha: password,
+        })
+        const medicineRow = await Database.from('medicamentos').first()
+        const medicine = {
+            idMedicamento: medicineRow.id,
+            horaGerenciamento: '10:20',
+        }
+        await Gerenciamento.query().where('id_cliente', cliente.id).delete()
+        const newMedicines = [
+            new Gerenciamento(),
+            new Gerenciamento(),
+            new Gerenciamento(),
+            new Gerenciamento(),
+            new Gerenciamento(),
+        ]
+        const data: any[] = []
+        const limit = 3
+        for (const newMedicine of newMedicines) {
+            newMedicine.idCliente = cliente.id
+            newMedicine.idMedicamento = medicine.idMedicamento
+            newMedicine.horaGerenciamento = medicine.horaGerenciamento as any
+            await newMedicine.save()
+            data.push({
+                id: newMedicine.id,
+                id_cliente: cliente.id,
+                id_medicamento: newMedicine.idMedicamento,
+                hora_gerenciamento: newMedicine.horaGerenciamento,
+                medicamento: {
+                    id: medicineRow.id,
+                    farmaceutica: medicineRow.farmaceutica,
+                    nome: medicineRow.nome,
+                },
+            })
+        }
+        data.reverse()
+        data.splice(limit)
+
+        const { body } = responseAuth.body()
+        const bearer = `Bearer ${body.cliente.token}`
+        
+        const page = 1
+        const total = newMedicines.length
+        const lastPage = Math.ceil(total / limit)
+        const responseMedicines = await client
+            .get(`/api/v1/medicines/all?page=${page}&limit=${limit}`)
+            .header('Authorization', bearer)
+        responseMedicines.assertStatus(200)
+        responseMedicines.assertBodyContains({
+            body: {
+                gerenciamentos: {
+                    meta: {
+                        total,
+                        per_page: limit,
+                        current_page: page,
+                        last_page:lastPage,
+                        first_page: 1,
+                        first_page_url: '/?page=1',
+                        last_page_url: '/?page=' + lastPage,
+                        next_page_url: page < lastPage ? '/?page=' + (page + 1) : null,
+                        previous_page_url: page > 1 ? '/?page=' + (page - 1) : null,
+                    },
+                    data,
+                }
+            }
+        })
+        await Gerenciamento.query().where('id_cliente', cliente.id).delete()
+        await cliente.delete()
+    })
 
 })
