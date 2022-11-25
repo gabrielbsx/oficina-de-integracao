@@ -429,4 +429,11 @@ test.group('MedicinesController Fetch', (group) => {
         await Gerenciamento.query().where('id_cliente', cliente.id).delete()
         await cliente.delete()
     })
+    test('should returns a 401 error code if get-by-id is called with invalid authorization token', async ({ client, route }) => {
+        const bearer = `Bearer invalid_token`
+        const responseMedicines = await client
+            .get(`/api/v1/medicines/get-by-id/0`)
+            .header('Authorization', bearer)
+        responseMedicines.assertStatus(401)
+    })
 })
