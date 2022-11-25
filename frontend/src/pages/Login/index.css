@@ -1,4 +1,4 @@
-.login h1{
+.login h1 {
     font-size: 48px;
     text-align: center;
     margin-top: 120px;
@@ -15,7 +15,7 @@
     font-size: 24px;
     margin: 24px 0px 8px 0px;
     font-family: Arial, Helvetica, sans-serif;
-    color: white;
+    color: #111;
 }
 
 .login input {
@@ -42,7 +42,7 @@
     color: #ed373a;
 }
 
-.spanlogin{
+.spanlogin {
     color: black;
     cursor: pointer;
     margin-top: 8px;

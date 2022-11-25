@@ -26,12 +26,12 @@ const Register = () => {
             repeatPassword: '',
           }}
           validationSchema={Yup.object({
-            name: Yup.string().required().max(50),
-            cpf: Yup.string().required().min(13).max(15).matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'Cpf deve corresponder ao seguinte formato: xxx.xxx.xxx-xx.'),
-            date: Yup.date().required(),
-            email: Yup.string().required().email(),
-            password: Yup.string().required().min(8).max(50).matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/, 'A senha deve ter pelo menos 8 caracteres contendo letras, números e pelo menos um caractere especial.'),
-            repeatPassword: Yup.string().required().oneOf([Yup.ref('password'), null], 'Confirmação de senha deve ser igual a senha'),
+            name: Yup.string().required('Nome é requerido').max(50),
+            cpf: Yup.string().required('CPF é requerido').min(13).max(15).matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'Cpf deve corresponder ao seguinte formato: xxx.xxx.xxx-xx.'),
+            date: Yup.date().required('Data é requerido'),
+            email: Yup.string().required('E-mail é requerido').email(),
+            password: Yup.string().required('Senha é requerido').min(8).max(50).matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/, 'A senha deve ter pelo menos 8 caracteres contendo letras, números e pelo menos um caractere especial.'),
+            repeatPassword: Yup.string().required('Confirmação de senha é requerido').oneOf([Yup.ref('password'), null], 'Confirmação de senha deve ser igual a senha'),
           })}
           onSubmit={async (values, { setSubmitting }) => {
             const {
@@ -80,7 +80,7 @@ const Register = () => {
             isSubmitting,
           }) => (
             <form id="formRegister" onSubmit={handleSubmit}>
-              <label htmlFor="name">Name_user</label>
+              <label htmlFor="name">Nome</label>
               <input
                 id="username"
                 name="name"
@@ -96,7 +96,7 @@ const Register = () => {
                 <small className="small-error">{errors.name}</small>
               ): null}
 
-              <label htmlFor="cpf">Cpf</label>
+              <label htmlFor="cpf">CPF</label>
               <input
                 id="usercpf"
                 name="cpf"
@@ -112,7 +112,7 @@ const Register = () => {
                 <small className="small-error">{errors.cpf}</small>
               ): null}
 
-              <label htmlFor="date">Cpf</label>
+              <label htmlFor="date">Data de nascimento</label>
               <input
                 id="userdate"
                 name="date"
