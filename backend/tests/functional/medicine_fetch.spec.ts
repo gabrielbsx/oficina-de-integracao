@@ -436,4 +436,29 @@ test.group('MedicinesController Fetch', (group) => {
             .header('Authorization', bearer)
         responseMedicines.assertStatus(401)
     })
+    test('should returns a 404 error code if get-by-id is called with invalid id', async ({ client, route }) => {
+        const cpf = '123.123.123-23'
+        const password = 'any_senha'
+        await Cliente.query().where('cpf', cpf).delete()
+        const cliente = await Cliente.create({
+            nome: 'any_nome',
+            email: 'any_email@mail.com',
+            cpf,
+            password: password,
+            dataNascimento: new Date(),
+        })
+        const responseAuth = await client.post(route('signin')).json({
+            cpf,
+            senha: password,
+        })
+        await Gerenciamento.query().where('id_cliente', cliente.id).delete()
+        const { body } = responseAuth.body()
+        const bearer = `Bearer ${body.cliente.token}`
+        const responseMedicines = await client
+            .get(`/api/v1/medicines/get-by-id/0`)
+            .header('Authorization', bearer)
+        responseMedicines.assertStatus(404)
+        await Gerenciamento.query().where('id_cliente', cliente.id).delete()
+        await cliente.delete()
+    })
 })
