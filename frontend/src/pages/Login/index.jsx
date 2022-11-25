@@ -25,8 +25,8 @@ const Login = ({ setToken }) =>{
                                 password: '',
                             }}
                             validationSchema={Yup.object({
-                                cpf: Yup.string().required().min(13).max(15).matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'Cpf deve corresponder ao seguinte formato: xxx.xxx.xxx-xx.'),
-                                password: Yup.string().required().min(8).max(50),
+                                cpf: Yup.string().required('Nome é requerido').min(13).max(15).matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'Cpf deve corresponder ao seguinte formato: xxx.xxx.xxx-xx.'),
+                                password: Yup.string().required('Senha é requerido').min(8).max(50),
                             })}
                             onSubmit={async (values, { setSubmitting }) => {
                                 const { cpf, password: senha } = values;
@@ -72,7 +72,7 @@ const Login = ({ setToken }) =>{
                             }) => (
                                 <form onSubmit={handleSubmit}>
                                     <div className="mb-3">
-                                        <label htmlFor="inputEmail" className="form-label">Cpf</label>
+                                        <label htmlFor="inputEmail" className="form-label">CPF</label>
                                         <input
                                             type="string"
                                             name="cpf"

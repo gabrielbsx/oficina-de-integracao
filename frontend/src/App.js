@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Main from "./pages/Main/index";
+import Home from "./pages/Home/index";
 import Login from "./pages/Login/index";
 import Register from "./pages/Register/index";
 import Refactor from "./pages/RefactoryPassword/index";
@@ -32,7 +32,7 @@ function App() {
       <BrowserRouter>
         {!token ? (
           <Routes>
-            <Route path="/" element={<Main />} />
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login setToken={setToken} />} />
             <Route path="/register" element={<Register />} />
             <Route path="/refactorpassword" element={<Refactor />} />
