@@ -1,6 +1,6 @@
 import Header from "../../components/Header";
 import api from "../../api";
-// import "./styles.css";
+import "./styles.css";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useMemo, useState } from "react";
@@ -55,19 +55,20 @@ const Medicines = () => {
       <Header screem="Medicines"></Header>
 
       <div className="cadastro">
-        <h1>Medicamentos</h1>
-        <Button
+        <h1 className="title">Medicamentos</h1>
+        <button
           onClick={() => {
             navegar('/registermedicine')
           }}
+          className="btnTitle"
         >
-          Adicionar
-        </Button>
+          <b>Adicionar</b>
+        </button>
         <TableContainer>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Medicamento</TableCell>
+                <TableCell className="text">Medicamento</TableCell>
                 <TableCell>Horário</TableCell>
                 <TableCell colSpan={2}>Ações</TableCell>
               </TableRow>
@@ -89,7 +90,7 @@ const Medicines = () => {
                       onClick={() => {
                         navegar(`/editmedicine/${medicine.id}`);
                       }}
-                      className="btn btn-primary"
+                      className="btn"
                     >
                       <b>Editar</b>
                     </button>
@@ -125,7 +126,7 @@ const Medicines = () => {
                           });
                         }
                       }}
-                      className="btn btn-primary"
+                      className="btn"
                     >
                       <b>Deletar</b>
                     </button>
