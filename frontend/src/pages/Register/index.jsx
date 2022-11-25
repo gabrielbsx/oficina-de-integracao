@@ -13,7 +13,7 @@ const Register = () => {
       <div className="register-user">
         <h1>Register</h1>
         <p className="description">
-          Como a sua conta, você poderá gerenciar suas coleções em flash cards.
+          Com a sua conta, você poderá gerenciar seus medicamentos.
         </p>
 
 				<Formik

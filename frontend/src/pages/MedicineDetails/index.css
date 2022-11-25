@@ -1,0 +1,46 @@
+input, label {
+    display: block;
+}
+
+.details {
+    width: 40vw;
+    margin: 0 auto;
+}
+
+.details h1 {
+    font-size: 48px;
+    text-align: center;
+    margin-top: 120px;
+    margin-bottom: 80px;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.content {
+    margin-left: 220px;
+}
+
+.content h2 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.content h3 {
+    font-size: 25px;
+    font-weight: lighter;
+}
+
+.content-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin:  80px 300px 0px 300px;
+}
+
+.btn{
+    background-color: red;
+    width: 120px;
+    justify-content: center;
+    text-align: center;
+  }
