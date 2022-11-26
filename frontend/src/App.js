@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Main from "./pages/Main/index";
+import Home from "./pages/Home/index";
 import Login from "./pages/Login/index";
 import Register from "./pages/Register/index";
 import Refactor from "./pages/RefactoryPassword/index";
@@ -9,6 +9,7 @@ import EditMedicine from "./pages/EditMedicine/index";
 import { useEffect, useState } from "react";
 import api from "./api";
 import Medicines from "./pages/Medicines";
+import MedicineDetails from "./pages/MedicineDetails";
 
 function App() {
   const [token, setToken] = useState();
@@ -32,7 +33,7 @@ function App() {
       <BrowserRouter>
         {!token ? (
           <Routes>
-            <Route path="/" element={<Main />} />
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login setToken={setToken} />} />
             <Route path="/register" element={<Register />} />
             <Route path="/refactorpassword" element={<Refactor />} />
@@ -42,6 +43,7 @@ function App() {
             <Route path="/" element={<Medicines />} />
             <Route path="/registermedicine" element={<RegisterMedicine />} />
             <Route path="/editmedicine/:id" element={<EditMedicine />} />
+            <Route path="/medicine-details/:id" element={<MedicineDetails />} />
           </Routes>
         )}
       </BrowserRouter>

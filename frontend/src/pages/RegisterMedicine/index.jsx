@@ -65,7 +65,7 @@ const RegisterMedicine = () => {
       <Header screem="RegisterMedicine"></Header>
 
       <div className="register">
-        <h1>Register Medicine</h1>
+        <h1>Registrar Medicamento</h1>
 
         <Formik
           initialValues={{}}

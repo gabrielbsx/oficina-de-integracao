@@ -1,6 +1,6 @@
 import Header from "../../components/Header";
 import api from "../../api";
-// import "./styles.css";
+import "./styles.css";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useMemo, useState } from "react";
@@ -34,15 +34,25 @@ const Medicines = () => {
         setMedicines(data.body.gerenciamentos.data);
       }
     } catch (error) {
-      const errors = error.response.data.errors;
-      const message = errors.map((error) => error.message).join(", ");
-      toast.error(message, {
-        style: {
-          borderRadius: "10px",
-          background: "#333",
-          color: "#fff",
-        },
-      });
+      if (error.message) {
+        toast.error(error.message, {
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
+      } else {
+        const errors = error.response.data.errors;
+        const message = errors.map((error) => error.message).join(", ");
+        toast.error(message, {
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
+      }
     }
   };
 
@@ -55,21 +65,23 @@ const Medicines = () => {
       <Header screem="Medicines"></Header>
 
       <div className="cadastro">
-        <h1>Medicamentos</h1>
-        <Button
+        <h1 className="title">Medicamentos</h1>
+        <button
           onClick={() => {
             navegar('/registermedicine')
           }}
+          className="btnTitle"
         >
-          Adicionar
-        </Button>
+          <b>Adicionar</b>
+        </button>
         <TableContainer>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Medicamento</TableCell>
+                <TableCell className="text">Medicamento</TableCell>
                 <TableCell>Horário</TableCell>
-                <TableCell colSpan={2}>Ações</TableCell>
+                <TableCell colSpan={2}></TableCell>
+                <TableCell colSpan={2}></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -87,9 +99,19 @@ const Medicines = () => {
                   <TableCell>
                     <button
                       onClick={() => {
+                        navegar(`medicine-details/${medicine.id}`);
+                      }}
+                      className="btnManage"
+                    >
+                      <b>Ver</b>
+                    </button>
+                  </TableCell>
+                  <TableCell>
+                    <button
+                      onClick={() => {
                         navegar(`/editmedicine/${medicine.id}`);
                       }}
-                      className="btn btn-primary"
+                      className="btnManage"
                     >
                       <b>Editar</b>
                     </button>
@@ -112,20 +134,28 @@ const Medicines = () => {
                             fetchMedicines();
                           }
                         } catch (error) {
-                          const errors = error.response.data.errors;
-                          const message = errors
-                            .map((error) => error.message)
-                            .join(", ");
-                          toast.error(message, {
-                            style: {
-                              borderRadius: "10px",
-                              background: "#333",
-                              color: "#fff",
-                            },
-                          });
+                          if (error.message) {
+                            toast.error(error.message, {
+                              style: {
+                                borderRadius: "10px",
+                                background: "#333",
+                                color: "#fff",
+                              },
+                            });
+                          } else {
+                            const errors = error.response.data.errors;
+                            const message = errors.map((error) => error.message).join(", ");
+                            toast.error(message, {
+                              style: {
+                                borderRadius: "10px",
+                                background: "#333",
+                                color: "#fff",
+                              },
+                            });
+                          }
                         }
                       }}
-                      className="btn btn-primary"
+                      className="btnManage"
                     >
                       <b>Deletar</b>
                     </button>
