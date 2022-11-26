@@ -17,7 +17,7 @@ input, label {
 }
 
 .content {
-    margin-left: 220px;
+    margin-left: 90px;
 }
 
 .content h2 {
@@ -35,7 +35,7 @@ input, label {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin:  80px 300px 0px 300px;
+    margin:  80px 150px 0px 150px;
 }
 
 .btn{

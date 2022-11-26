@@ -9,6 +9,7 @@ import EditMedicine from "./pages/EditMedicine/index";
 import { useEffect, useState } from "react";
 import api from "./api";
 import Medicines from "./pages/Medicines";
+import MedicineDetails from "./pages/MedicineDetails";
 
 function App() {
   const [token, setToken] = useState();
@@ -42,6 +43,7 @@ function App() {
             <Route path="/" element={<Medicines />} />
             <Route path="/registermedicine" element={<RegisterMedicine />} />
             <Route path="/editmedicine/:id" element={<EditMedicine />} />
+            <Route path="/medicine-details/:id" element={<MedicineDetails />} />
           </Routes>
         )}
       </BrowserRouter>

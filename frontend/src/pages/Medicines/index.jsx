@@ -34,15 +34,25 @@ const Medicines = () => {
         setMedicines(data.body.gerenciamentos.data);
       }
     } catch (error) {
-      const errors = error.response.data.errors;
-      const message = errors.map((error) => error.message).join(", ");
-      toast.error(message, {
-        style: {
-          borderRadius: "10px",
-          background: "#333",
-          color: "#fff",
-        },
-      });
+      if (error.message) {
+        toast.error(error.message, {
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
+      } else {
+        const errors = error.response.data.errors;
+        const message = errors.map((error) => error.message).join(", ");
+        toast.error(message, {
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
+      }
     }
   };
 
@@ -89,7 +99,7 @@ const Medicines = () => {
                   <TableCell>
                     <button
                       onClick={() => {
-                        navegar(``);
+                        navegar(`medicine-details/${medicine.id}`);
                       }}
                       className="btnManage"
                     >
@@ -124,17 +134,25 @@ const Medicines = () => {
                             fetchMedicines();
                           }
                         } catch (error) {
-                          const errors = error.response.data.errors;
-                          const message = errors
-                            .map((error) => error.message)
-                            .join(", ");
-                          toast.error(message, {
-                            style: {
-                              borderRadius: "10px",
-                              background: "#333",
-                              color: "#fff",
-                            },
-                          });
+                          if (error.message) {
+                            toast.error(error.message, {
+                              style: {
+                                borderRadius: "10px",
+                                background: "#333",
+                                color: "#fff",
+                              },
+                            });
+                          } else {
+                            const errors = error.response.data.errors;
+                            const message = errors.map((error) => error.message).join(", ");
+                            toast.error(message, {
+                              style: {
+                                borderRadius: "10px",
+                                background: "#333",
+                                color: "#fff",
+                              },
+                            });
+                          }
                         }
                       }}
                       className="btnManage"
